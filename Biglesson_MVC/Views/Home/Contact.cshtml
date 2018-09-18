@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<!-- Contact Info -->
+<head>
+    <!-- Contact -->
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/contact_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/contact_responsive.css">
+</head>
+<div class="contact_info">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="contact_info_container d-flex flex-lg-row flex-column justify-content-between align-items-between">
+
+                    <!-- Contact Item -->
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="~/Content/images/contact_1.png" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Điện thoại</div>
+                            <div class="contact_info_text">+84 0125 287 4562</div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Item -->
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="~/Content/images/contact_2.png" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Email</div>
+                            <div class="contact_info_text">robotmeo1999@gmail.com</div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Item -->
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="~/Content/images/contact_3.png" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Địa điểm</div>
+                            <div class="contact_info_text">Số 135 - Tổ 3 - Phường Phúc Diễn</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Form -->
+
+<div class="contact_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="contact_form_container">
+                    <div class="contact_form_title">Đánh giá của bạn</div>
+
+                    <form action="#" id="contact_form">
+                        <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
+                            <input type="text" id="contact_form_name" class="contact_form_name input_field" placeholder="Tên của bạn" required="required" data-error="Name is required.">
+                            <input type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="Email của bạn" required="required" data-error="Email is required.">
+                            <input type="text" id="contact_form_phone" class="contact_form_phone input_field" placeholder="Số điện thoại">
+                        </div>
+                        <div class="contact_form_text">
+                            <textarea style="max-width: none;" id="contact_form_message" class="text_field contact_form_message" name="message" placeholder="Đánh giá" required="required" data-error="Please, write us a message."></textarea>
+                        </div>
+                        <div class="contact_form_button">
+                            <button type="submit" class="button contact_submit_button">Gửi đánh giá</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel"></div>
+</div>
+
+<!-- Map -->
+
+<div class="contact_map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31791.416306026706!2d105.79102699882492!3d21.036568931982064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab6a6de9738b%3A0xdc2851012dc3be70!2zVsaw4budbiBUaMO6IFRo4bunIEzhu4c!5e0!3m2!1svi!2s!4v1534990272601" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+

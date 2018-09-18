@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My ASP.NET - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/bootstrap4/bootstrap.min.css">
+    <link href="~/Content/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/slick-1.8.0/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/responsive.css">
+
+    <style>
+        h1, h2, h3, h4, h5 {
+            font-family: Cambria !important;
+        }
+    </style>
+</head>
+<body style="font-family:Cambria !important;" >
+    <header class="header">
+        <!-- Top Bar -->
+        <div class="top_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col d-flex flex-row">
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/Content/images/phone.png" alt=""></div>+84 1252874562</div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/Content/images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">robotmeo1999@gmail.com</a></div>
+                        <div class="top_bar_content ml-auto">
+                            <div class="top_bar_menu">
+                                <ul class="standard_dropdown top_bar_dropdown">
+                                    <li>
+                                        <a href="#">Tiếng Việt<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="#">English</a></li>
+                                            <li><a href="#">Tiếng Việt</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">VND VN<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="#">$ US dollar</a></li>
+                                            <li><a href="#">VND VN đ</a></li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="top_bar_user">
+                                <div class="user_icon"><img src="~/Content/images/user.svg" alt=""></div>
+                                @{
+                                    if (ViewBag.listUserSession != null)
+                                    {
+                                        foreach (var item in ViewBag.listUserSession)
+                                        {
+                                        <div >
+                                            <ul class="standard_dropdown main_nav_dropdown">
+                                                <li class="hassubs">
+                                                    <a href="#">Xin chào : @item.userName</a>
+                                                    <ul>
+                                                        <li><a href="#">Đăng xuất</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                            
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <div><a href="@Url.Action("Signup","Admin")">Đăng ký</a></div>
+                                        <div><a href="@Url.Action("Login","Admin")">Đăng nhập</a></div>
+                                    }
+                                }
+
+                                <!-- Url.Action("Login","Admin") -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Main -->
+
+        <div class="header_main">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Logo -->
+                    <div class="col-lg-2 col-sm-3 col-3 order-1">
+                        <div class="logo_container">
+                            <div class="logo"><a href="#">X-HiTech</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                        <div class="header_search">
+                            <div class="header_search_content">
+                                <div class="header_search_form_container">
+                                    <form action="@Url.Action("Product",new {flat = 1})" class="header_search_form clearfix" method="post">
+                                        <input id="search" name="search" type="search" required="required" class="header_search_input" placeholder="Tìm kiếm theo sản phẩm...">
+                                        <div class="custom_dropdown">
+                                            <div class="custom_dropdown_list">
+                                                <span class="custom_dropdown_placeholder clc"></span>
+                                                <ul class="custom_list clc">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="~/Content/images/search.png" alt=""></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Wishlist -->
+                    <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                        <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                            <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+                                <div class="wishlist_icon"><img src="~/Content/images/heart.png" alt=""></div>
+                                <div class="wishlist_content">
+                                    <div class="wishlist_text"><a href="#">Yêu thích</a></div>
+                                    <div class="wishlist_count">115</div>
+                                </div>
+                            </div>
+
+                            <!-- Cart -->
+                            <div class="cart">
+                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                    <div class="cart_icon">
+                                        <img src="~/Content/images/cart.png" alt="">
+                                        @{
+                                            int Soluong=0;
+                                            int totalMonney = 0;
+                                            
+                                            if (ViewBag.Cart != null)
+                                            {
+                                                foreach (var item in ViewBag.Cart)
+                                                {
+                                                    Soluong = Soluong + Convert.ToInt16(item.SoLuong);
+                                                    totalMonney = (totalMonney + item.ThanhTien);
+                                                }
+                                            }
+                                           
+                                            <div class="cart_count"><span>@Soluong</span></div>
+                                        }
+
+
+                                    </div>
+                                    <div class="cart_content">
+                                        <div class="cart_text"><a href="@Url.Action("Cart")">Giỏi hàng </a></div>
+                                        <div class="cart_price">@totalMonney đ</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+
+        <nav class="main_nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="main_nav_content d-flex flex-row">
+
+                            <!-- Categories Menu -->
+                            <!-- Main Nav Menu -->
+
+                            <div class="main_nav_menu ">
+                                <ul class="standard_dropdown main_nav_dropdown">
+                                    <li style="width: 143px !important; " class="cat_menu_container"><a style="color: #343a40b8 !important;" href="@Url.Action("Index")">Trang chủ<i class="fas fa-chevron-down"></i></a></li>
+
+                                    <li class="hassubs">
+                                        <a href="#" style="color: #343a40b8 !important;">Danh mục<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            @foreach (var item in ViewBag.listCategories)
+                                            {
+                                                <li><a href="@Url.Action("Product",new {flat = 2,ID = item.id })"> @item.name <i class="fas fa-chevron-down"></i></a></li>
+                                            }
+
+                                        </ul>
+                                    </li>
+                                    <li><a style="color: #343a40b8 !important;" href="@Url.Action("Product",new {flat = 0 })">Sản phẩm<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a style="color: #343a40b8 !important;" href="@Url.Action("Blog")">Tin tức<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a style="color: #343a40b8 !important;" href="@Url.Action("Contact")">Liên hệ<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a style="color: #343a40b8 !important;" href="@Url.Action("About")">Giới thiệu<i class="fas fa-chevron-down"></i></a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Menu Trigger -->
+
+                            <div class="menu_trigger_container ml-auto">
+                                <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+                                    <div class="menu_burger">
+                                        <div class="menu_trigger_text">menu</div>
+                                        <div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Menu -->
+
+        <div class="page_menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="page_menu_content">
+
+                            <div class="page_menu_search">
+                                <form action="#">
+                                    <input type="search" required="required" class="page_menu_search_input" placeholder="Tìm kiếm sản phẩm...">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+
+        @RenderBody()
+
+    </main>
+
+    <!-- Newsletter -->
+
+    <div class="newsletter">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+                        <div class="newsletter_title_container">
+                            <div class="newsletter_icon"><img src="~/Content/images/send.png" alt=""></div>
+                            <div class="newsletter_title">Đăng ký để nhận tin tức mới nhất</div>
+                            <div class="newsletter_text"><p>...và nhận 20% phí mua quà đầu tiên.</p></div>
+                        </div>
+                        <div class="newsletter_content clearfix">
+                            <form action="#" class="newsletter_form">
+                                <input type="email" class="newsletter_input" required="required" placeholder="Nhập email của bạn...">
+                                <button class="newsletter_button">Đăng ký</button>
+                            </form>
+                            <div class="newsletter_unsubscribe_link"><a href="#">Hủy đăng ký</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 footer_col">
+                    <div class="footer_column footer_contact">
+                        <div class="logo_container">
+                            <div class="logo"><a href="#">X-HiTech</a></div>
+                        </div>
+                        <div class="footer_title">Bạn có thắc mắc ? Gọi cho chúng tôi (24/7)</div>
+                        <div class="footer_phone">+84 1252874562</div>
+                        <div class="footer_contact_text">
+                            <p>Số 135 - Tổ 3 - Phường Phúc Diễn</p>
+                            <p>Quận Nam Từ Liêm - Hà Nội</p>
+                        </div>
+                        <div class="footer_social">
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google"></i></a></li>
+                                <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 offset-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Tìm kiếm nhanh</div>
+                        <ul class="footer_list">
+                            @foreach (var item in ViewBag.listCategories)
+                            {
+                                <li><a href="@Url.Action("Product",new {flat = 2,ID = item.id })">@item.name </a></li>
+                            }
+                        </ul>
+                        <div class="footer_subtitle">Gadgets</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Car Electronics</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <ul class="footer_list footer_list_2">
+                            @foreach (var item in ViewBag.listBrands)
+                            {
+                                <li><a href="@Url.Action("Product",new {flat = 3,ID = item.id })"> @item.brand_name </a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Customer Care</div>
+                        <ul class="footer_list">
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Order Tracking</a></li>
+                            <li><a href="#">Wish List</a></li>
+                            <li><a href="#">Customer Services</a></li>
+                            <li><a href="#">Returns / Exchange</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Product Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+                        <div class="copyright_content">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/CHiyiSyis" target="_blank">Dandy Hữu</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </div>
+                        <div class="logos ml-sm-auto">
+                            <ul class="logos_list">
+                                <li><a href="#"><img src="~/Content/images/logos_1.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/Content/images/logos_2.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/Content/images/logos_3.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/Content/images/logos_4.png" alt=""></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script src="@Url.Content("~/Scripts/js//jquery-3.3.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/styles/bootstrap4/popper.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/styles/bootstrap4/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/plugins/greensock/TweenMax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/plugins/greensock/TimelineMax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/plugins/scrollmagic/ScrollMagic.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/plugins/greensock/animation.gsap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/plugins/greensock/ScrollToPlugin.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/plugins/OwlCarousel2-2.2.1/owl.carousel.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/slick-1.8.0/slick.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/plugins/easing/easing.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/js/custom.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Content/plugins/parallax-js-master/parallax.min.js")" type="text/javascript"></script>
+    <!--Regular-->
+    <script src="@Url.Content("~/Scripts/js/regular_custom.js")" type="text/javascript"></script>
+    <!--Product-->
+    <script src="@Url.Content("~/Scripts/js/product_custom.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/plugins/Isotope/isotope.pkgd.min.js")" ></script>
+    <script src="@Url.Content("~/Content/plugins/jquery-ui-1.12.1.custom/jquery-ui.js")" ></script>
+    <script src="@Url.Content("~/Scripts/js/shop_customm.js")" ></script>
+</body>
+</html>

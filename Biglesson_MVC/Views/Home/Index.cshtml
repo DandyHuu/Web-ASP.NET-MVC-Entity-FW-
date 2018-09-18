@@ -1,0 +1,1085 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="super_layout">
+    <!-- Banner -->
+    <div class="banner_2">
+        <div class="banner_2_background" style="background-image:url(../../Content/images/banner_2_background.jpg)"></div>
+        <div class="banner_2_container">
+            <div class="banner_2_dots"></div>
+            <!-- Banner 2 Slider -->
+
+            <div class="owl-carousel owl-theme banner_2_slider">
+
+                <!-- Banner 2 Slider Item -->
+                @foreach (var item in ViewBag.listSlide)
+                {
+
+                    <div class="owl-item">
+                        <div class="banner_2_item">
+                            <div class="container fill_height">
+                                <div class="row fill_height">
+                                    <div class="col-lg-4 col-md-6 fill_height">
+                                        <div class="banner_2_content">
+                                            <div class="banner_2_category">Hàng mới cập nhật</div>
+                                            <div class="banner_2_title">@item.title</div>
+                                            <div class="banner_2_text">@item.dicription</div>
+                                            <div class="banner_2_title">Tâm điểm</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 fill_height">
+                                        <div class="banner_2_image_container">
+                                            <div class="banner_2_image"><img src="~/Content/images/@item.image" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Characteristics -->
+
+    <div class="characteristics">
+        <div class="container">
+            <div class="row">
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_icon"><img src="~/Content/images/char_1.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Free Delivery</div>
+                            <div class="char_subtitle">from $50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_icon"><img src="~/Content/images/char_2.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Free Delivery</div>
+                            <div class="char_subtitle">from $50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_icon"><img src="~/Content/images/char_3.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Free Delivery</div>
+                            <div class="char_subtitle">from $50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_icon"><img src="~/Content/images/char_4.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Free Delivery</div>
+                            <div class="char_subtitle">from $50</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Deals of the week -->
+
+    <div class="deals_featured">
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex flex-lg-row flex-column align-items-center justify-content-start">
+                    <!-- Deals -->
+
+                    <div class="deals">
+                        <div class="deals_title">Ưu đãi trong tuần</div>
+                        <div class="deals_slider_container">
+
+                            <!-- Deals Slider -->
+                            <div class="owl-carousel owl-theme deals_slider">
+
+                                <!-- Deals Item -->
+                                @foreach (var item in ViewBag.listSale)
+                                {
+                                    if (item.star == 5)
+                                    {
+                                        int a = Convert.ToInt32(item.price);
+                                        int b = Convert.ToInt32(item.sale);
+                                        int c = a - (a * b) / 100;
+
+                                    <div class="owl-item deals_item">
+                                        <div class="deals_image"><img style="width: 70%;margin-left: 50px;" src="~/Content/images/@item.image" alt=""></div>
+                                        <div class="deals_content">
+                                            <div class="deals_info_line d-flex flex-row justify-content-start">
+                                                <div class="deals_item_category">
+                                                    <i class="fa fa-star text-warning"></i>
+                                                    <i class="fa fa-star text-warning"></i>
+                                                    <i class="fa fa-star text-warning"></i>
+                                                    <i class="fa fa-star text-warning"></i>
+                                                    <i class="fa fa-star text-warning"></i>
+                                                </div>
+                                            </div>
+                                            <div class="deals_info_line d-flex flex-row justify-content-start">
+                                                <div class="deals_item_category">Giảm giá : <span class="text-danger">@item.sale %</span></div>
+                                                <div class="deals_item_price_a ml-auto"> Giá cũ : @String.Format("{0:0,0 đ}", item.price)</div>
+
+                                            </div>
+                                            <div class="deals_info_line d-flex flex-row justify-content-start">
+                                                <div class="deals_item_name">@item.name_product</div>
+                                                <div class="deals_item_price ml-auto">@String.Format("{0:0,0 đ}", c)</div>
+                                            </div>
+                                            <div class="available">
+                                                <div class="available_line d-flex flex-row justify-content-start">
+                                                    <div class="available_title">Đã bán : <span>6</span></div>
+                                                    <div class="sold_title ml-auto">Còn lại : <span>@item.quantity</span></div>
+                                                </div>
+                                                <div class="available_bar"><span style="width:17%"></span></div>
+                                            </div>
+                                            <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
+                                                <div class="deals_timer_title_container">
+                                                    <div class="deals_timer_title">Nhanh tay</div>
+                                                    <div class="deals_timer_subtitle">Khuyến mãi còn :</div>
+                                                </div>
+                                                <div class="deals_timer_content ml-auto">
+                                                    <div class="deals_timer_box clearfix" data-target-time="">
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_hr" class="deals_timer_hr"></div>
+                                                            <span>giờ</span>
+                                                        </div>
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_min" class="deals_timer_min"></div>
+                                                            <span>phút</span>
+                                                        </div>
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_sec" class="deals_timer_sec"></div>
+                                                            <span>giây</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+
+                                }
+
+                            </div>
+
+                        </div>
+
+                        <div class="deals_slider_nav_container">
+                            <div class="deals_slider_prev deals_slider_nav"><i class="fas fa-chevron-left ml-auto"></i></div>
+                            <div class="deals_slider_next deals_slider_nav"><i class="fas fa-chevron-right ml-auto"></i></div>
+                        </div>
+                    </div>
+
+                    <!-- Featured -->
+                    <div class="featured">
+                        <div class="tabbed_container">
+                            <div class="tabs">
+                                <ul class="clearfix">
+                                    <li class="active">Yêu thích</li>
+                                    <li>Đang giảm giá</li>
+                                    <li>Hàng mới</li>
+                                </ul>
+                                <div class="tabs_line"><span></span></div>
+                            </div>
+
+                            <!-- Product Panel -->
+                            <div class="product_panel panel active">
+                                <div class="featured_slider slider">
+
+                                    <!-- Slider Item -->
+                                    @foreach (var item in ViewBag.listFeature)
+                                    {
+                                        <div class="featured_slider_item">
+                                            <div class="border_active"></div>
+                                            <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img style="  width: 70%;" src="~/Content/images/@item.image" alt=""></div>
+                                                <div class="product_content">
+                                                    @if (item.sale > 0)
+                                                    {
+                                                        int a = Convert.ToInt32(item.price);
+                                                        int b = Convert.ToInt32(item.sale);
+                                                        int c = a - (a * b)/100 ;
+
+                                                        
+                                                    <div class="product_price discount">
+                                                        @String.Format("{0:0,0 đ}", c) 
+                                                        <span> @String.Format("{0:0,0 đ}", item.price)</span>
+                                                    </div>
+
+                                                    }
+                                                    else
+                                                    {
+                                                    <div class="product_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                    }
+
+                                                    <div class="product_name"><div><a href="@Url.Action("ProductDetail",new { id = item.id })"> @item.name_product </a></div></div>
+                                                    <div class="product_extras">
+                                                        <div class="product_color">
+                                                            <input type="radio" checked name="product_color" style="background:#b19c83">
+                                                            <input type="radio" name="product_color" style="background:#000000">
+                                                            <input type="radio" name="product_color" style="background:#999999">
+                                                        </div>
+                                                        <a  href="@Url.Action("Add","Cart",new {SanPhamID = item.id })" style="padding-top: 10px;" class="btn product_cart_button">Thêm vào giỏ</a>
+                                                    </div>
+                                                </div>
+                                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                <ul class="product_marks">
+                                                    @if (item.sale > 0)
+                                                    {
+                                                        <li class="product_mark product_discount">-@item.sale%</li>
+                                                    }
+                                                    @if (item._new == 1)
+                                                    {
+                                                        <li class="product_mark product_new">new</li>
+                                                    }
+                                                 </ul>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="featured_slider_dots_cover"></div>
+                            </div>
+
+                            <!-- Product Panel -->
+
+                            <div class="product_panel panel">
+                                <div class="featured_slider slider">
+
+                                    <!-- Slider Item -->
+                                    @foreach (var item in ViewBag.listSale)
+                                    {
+
+                                        <div class="featured_slider_item">
+                                            <div class="border_active"></div>
+                                            <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div class="product_image d-flex flex-column align-items-center justify-content-center" ><img  style="  width: 70%;" src="~/Content/images/@item.image" alt=""></div>
+                                                <div class="product_content">
+                                                    @if (item.sale > 0)
+                                                    {
+                                                        int a = Convert.ToInt32(item.price);
+                                                        int b = Convert.ToInt32(item.sale);
+                                                        int c = a - (a * b) / 100;
+
+
+                                                        <div class="product_price discount">
+                                                            @String.Format("{0:0,0 đ}", c)
+                                                            <span> @String.Format("{0:0,0 đ}", item.price)</span>
+                                                        </div>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="product_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                    }
+
+                                                    <div class="product_name"><div><a href="@Url.Action("ProductDetail",new { id = item.id })"> @item.name_product </a></div></div>
+                                                    <div class="product_extras">
+                                                        <div class="product_color">
+                                                            <input type="radio" checked name="product_color" style="background:#b19c83">
+                                                            <input type="radio" name="product_color" style="background:#000000">
+                                                            <input type="radio" name="product_color" style="background:#999999">
+                                                        </div>
+                                                        <a href="@Url.Action("Add","Cart",new {SanPhamID = item.id })" style="padding-top: 10px;" class="btn product_cart_button">Thêm vào giỏ</a>
+                                                    </div>
+                                                </div>
+                                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                <ul class="product_marks">
+                                                    @if (item.sale > 0)
+                                                    {
+                                                        <li class="product_mark product_discount">-@item.sale%</li>
+                                                    }
+                                                    @if (item._new == 1)
+                                                    {
+                                                        <li class="product_mark product_new">new</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+                                   
+                                </div>
+                                <div class="featured_slider_dots_cover"></div>
+                            </div>
+
+                            <!-- Product Panel -->
+
+                            <div class="product_panel panel">
+                                <div class="featured_slider slider">
+
+                                    <!-- Slider Item -->
+                                    @foreach (var item in ViewBag.listNew)
+                                    {
+                                        <div class="featured_slider_item">
+                                            <div class="border_active"></div>
+                                            <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img  style="  width: 70%;"  src="~/Content/images/@item.image" alt=""></div>
+                                                <div class="product_content">
+                                                    @if (item.sale > 0)
+                                                    {
+                                                        int a = Convert.ToInt32(item.price);
+                                                        int b = Convert.ToInt32(item.sale);
+                                                        int c = a - (a * b) / 100;
+
+
+                                                        <div class="product_price discount">
+                                                            @String.Format("{0:0,0 đ}", c)
+                                                            <span> @String.Format("{0:0,0 đ}", item.price)</span>
+                                                        </div>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="product_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                    }
+
+                                                    <div class="product_name"><div><a href="@Url.Action("ProductDetail",new { id = item.id })"> @item.name_product </a></div></div>
+                                                    <div class="product_extras">
+                                                        <div class="product_color">
+                                                            <input type="radio" checked name="product_color" style="background:#b19c83">
+                                                            <input type="radio" name="product_color" style="background:#000000">
+                                                            <input type="radio" name="product_color" style="background:#999999">
+                                                        </div>
+                                                        <a href="@Url.Action("Add","Cart",new {SanPhamID = item.id })" style="padding-top: 10px;" class="btn product_cart_button">Thêm vào giỏ</a>
+                                                    </div>
+                                                </div>
+                                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                <ul class="product_marks">
+                                                    @if (item.sale > 0)
+                                                    {
+                                                        <li class="product_mark product_discount">-@item.sale%</li>
+                                                    }
+                                                    @if (item._new == 1)
+                                                    {
+                                                        <li class="product_mark product_new">new</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="featured_slider_dots_cover"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Categories -->
+
+    <div class="popular_categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="popular_categories_content">
+                        <div class="popular_categories_title">Tất cả danh mục</div>
+                        <div class="popular_categories_slider_nav">
+                            <div class="popular_categories_prev popular_categories_nav"><i class="fas fa-angle-left ml-auto"></i></div>
+                            <div class="popular_categories_next popular_categories_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+                        </div>
+                        <div class="popular_categories_link"><a href="#"></a></div>
+                    </div>
+                </div>
+
+                <!-- Popular Categories Slider -->
+
+                <div class="col-lg-9">
+                    <div class="popular_categories_slider_container">
+                        <div class="owl-carousel owl-theme popular_categories_slider">
+
+                            <!-- Popular Categories Item -->
+                            <div class="owl-item">
+                                <div class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                    <div class="popular_category_image"><img src="~/Content/images/popular_1.png" alt=""></div>
+                                    <div class="popular_category_text">Điện thoại & Máy tính bảng</div>
+                                </div>
+                            </div>
+
+                            <!-- Popular Categories Item -->
+                            <div class="owl-item">
+                                <div class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                    <div class="popular_category_image"><img src="~/Content/images/popular_2.png" alt=""></div>
+                                    <div class="popular_category_text">Máy tính & Laptops</div>
+                                </div>
+                            </div>
+
+                            <!-- Popular Categories Item -->
+                            <div class="owl-item">
+                                <div class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                    <div class="popular_category_image"><img src="~/Content/images/popular_3.png" alt=""></div>
+                                    <div class="popular_category_text">Gadgets</div>
+                                </div>
+                            </div>
+
+                            <!-- Popular Categories Item -->
+                            <div class="owl-item">
+                                <div class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                    <div class="popular_category_image"><img src="~/Content/images/popular_4.png" alt=""></div>
+                                    <div class="popular_category_text">Video Games & Consoles</div>
+                                </div>
+                            </div>
+
+                            <!-- Popular Categories Item -->
+                            <div class="owl-item">
+                                <div class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                    <div class="popular_category_image"><img src="~/Content/images/popular_5.png" alt=""></div>
+                                    <div class="popular_category_text">Accessories</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <!-- Hot New Arrivals -->
+
+    <div class="new_arrivals">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="tabbed_container">
+                        <div class="tabs clearfix tabs-right">
+                            <div class="new_arrivals_title">Hàng mới Hot</div>
+                            <ul class="clearfix">
+                                <li class="active">Ðánh giá cao</li>
+                                <li>Phụ kiện khác</li>
+                                <li>Laptops & Máy tính</li>
+                            </ul>
+                            <div class="tabs_line"><span></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-9" style="z-index:1;">
+
+                                <!-- Product Panel -->
+                                <div class="product_panel panel active">
+                                    <div class="arrivals_slider slider">
+
+                                        <!-- Slider Item -->
+                                        @foreach (var item in ViewBag.listStar)
+                                        {
+                                            <div class="arrivals_slider_item">
+                                                <div class="border_active"></div>
+                                                <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img style="max-width:80%;" src="~/Content/images/@item.image" alt=""></div>
+                                                    <div class="product_content">
+                                                        @if (item.sale > 0)
+                                                        {
+                                                            int a = Convert.ToInt32(item.price);
+                                                            int b = Convert.ToInt32(item.sale);
+                                                            int c = a - (a * b) / 100;
+
+
+                                                            <div class="product_price discount">
+                                                                @String.Format("{0:0,0 đ}", c)
+                                                                <span>@String.Format("{0:0,0 đ}", item.price)</span>
+                                                            </div>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="product_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                        }
+                                                        <div class="product_name"><div><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div></div>
+                                                        <div class="product_extras">
+                                                            <div class="product_color">
+                                                                <input type="radio" checked name="product_color" style="background:#b19c83">
+                                                                <input type="radio" name="product_color" style="background:#000000">
+                                                                <input type="radio" name="product_color" style="background:#999999">
+                                                            </div>
+                                                            <a  href="@Url.Action("Add","Cart",new {SanPhamID = item.id })" style="padding-top: 10px;" class="btn product_cart_button">Thêm vào giỏ</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                    <ul class="product_marks">
+                                                        @if (item.sale > 0)
+                                                        {
+                                                            <li class="product_mark product_discount">-@item.sale%</li>
+                                                        }
+                                                        @if (item._new == 1)
+                                                        {
+                                                            <li class="product_mark product_new">new</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+
+
+                                    </div>
+                                    <div class="arrivals_slider_dots_cover"></div>
+                                </div>
+
+                                <!-- Product Panel -->
+                                <div class="product_panel panel">
+                                    <div class="arrivals_slider slider">
+
+                                        <!-- Slider Item -->
+                                        @foreach (var item in ViewBag.listAccess)
+                                        {
+                                            <div class="arrivals_slider_item">
+                                                <div class="border_active"></div>
+                                                <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img style="max-width:80%;" src="~/Content/images/@item.image" alt=""></div>
+                                                    <div class="product_content">
+                                                        @if (item.sale > 0)
+                                                        {
+                                                            int a = Convert.ToInt32(item.price);
+                                                            int b = Convert.ToInt32(item.sale);
+                                                            int c = a - (a * b) / 100;
+
+
+                                                            <div class="product_price discount">
+                                                                @String.Format("{0:0,0 đ}", c)
+                                                                <span>@String.Format("{0:0,0 đ}", item.price)</span>
+                                                            </div>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="product_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                        }
+                                                        <div class="product_name"><div><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div></div>
+                                                        <div class="product_extras">
+                                                            <div class="product_color">
+                                                                <input type="radio" checked name="product_color" style="background:#b19c83">
+                                                                <input type="radio" name="product_color" style="background:#000000">
+                                                                <input type="radio" name="product_color" style="background:#999999">
+                                                            </div>
+                                                            <a  href="@Url.Action("Add","Cart",new {SanPhamID = item.id })" style="padding-top: 10px;" class="btn product_cart_button">Thêm vào giỏ</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                    <ul class="product_marks">
+                                                        @if (item.sale > 0)
+                                                        {
+                                                            <li class="product_mark product_discount">-@item.sale%</li>
+                                                        }
+                                                        @if (item._new == 1)
+                                                        {
+                                                            <li class="product_mark product_new">new</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <div class="arrivals_slider_dots_cover"></div>
+                                </div>
+
+                                <!-- Product Panel -->
+                                <div class="product_panel panel">
+                                    <div class="arrivals_slider slider">
+
+                                        <!-- Slider Item -->
+                                        @foreach(var item in ViewBag.listLaptop)
+                                        { 
+                                        <div class="arrivals_slider_item">
+                                            <div class="border_active"></div>
+                                            <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img style="max-width:80%;" src="~/Content/images/@item.image" alt=""></div>
+                                                <div class="product_content">
+                                                    @if (item.sale > 0)
+                                                    {
+                                                        int a = Convert.ToInt32(item.price);
+                                                        int b = Convert.ToInt32(item.sale);
+                                                        int c = a - (a * b) / 100;
+
+
+                                                        <div class="product_price discount">
+                                                            @String.Format("{0:0,0 đ}", c)
+                                                            <span>@String.Format("{0:0,0 đ}", item.price)</span>
+                                                        </div>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="product_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                    }
+                                                    <div class="product_name"><div><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div></div>
+                                                    <div class="product_extras">
+                                                        <div class="product_color">
+                                                            <input type="radio" checked name="product_color" style="background:#b19c83">
+                                                            <input type="radio" name="product_color" style="background:#000000">
+                                                            <input type="radio" name="product_color" style="background:#999999">
+                                                        </div>
+                                                        <a  href="@Url.Action("Add","Cart",new {SanPhamID = item.id })" style="padding-top: 10px;" class="btn product_cart_button">Thêm vào giỏ</a>
+                                                    </div>
+                                                </div>
+                                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                                <ul class="product_marks">
+                                                    @if (item.sale > 0)
+                                                    {
+                                                        <li class="product_mark product_discount">-@item.sale%</li>
+                                                    }
+                                                    @if (item._new == 1)
+                                                    {
+                                                        <li class="product_mark product_new">new</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                       }
+                                    </div>
+                                    <div class="arrivals_slider_dots_cover"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-3">
+                                @foreach (var item in ViewBag.listNewHot)
+                                {
+                                    <div class="arrivals_single clearfix">
+                                        <div class="d-flex flex-column align-items-center justify-content-center">
+                                            <div class="arrivals_single_image"><img src="~/Content/images/@item.image" alt=""></div>
+                                            <div class="arrivals_single_content">
+
+                                                <div class="arrivals_single_category"><a href="#">Smartphones</a></div>
+                                                <div class="arrivals_single_name_container clearfix">
+                                                    <div class="arrivals_single_name" style="display:block;"><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div>
+                                                    <div class="arrivals_single_price text-right">
+                                                        @if (item.sale > 0)
+                                                        {
+                                                            int a = Convert.ToInt32(item.price);
+                                                            int b = Convert.ToInt32(item.sale);
+                                                            int c = a - (a * b) / 100;
+
+                                                            <div class=" " style="font-size: 16px; font-weight: 500;  color: #df3b3b;">
+                                                                Giá mới: @String.Format("{0:0,0 đ}", c)
+                                                                <br />
+                                                                <span style="font-size: 12px; font-weight: 400; color: rgba(0,0,0,0.6); margin-left: 10px;">Giá cũ: @String.Format("{0:0,0 đ}", item.price)</span>
+                                                            </div>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style="font-size: 16px; font-weight: 500;  color: #df3b3b;">Giá : @String.Format("{0:0,0 đ}", item.price)</div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="arrivals_single_rating">
+                                                    Đánh giá :
+                                                    @{ 
+                                                        for (int i = 0; i < item.star; i++)
+                                                        {
+                                                            <i class="fa fa-star text-warning"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                                <a href="@Url.Action("Add","Cart",new {SanPhamID = item.id })" class="btn arrivals_single_button" style="padding-top: 10px; color:white;">Thêm vào giỏ</a>
+                                            </div>
+                                            
+                                            <ul class="arrivals_single_marks product_marks">
+                                                <li class="arrivals_single_mark product_mark product_new">new</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Best Sellers -->
+
+    <div class="best_sellers">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="tabbed_container">
+                        <div class="tabs clearfix tabs-right">
+                            <div class="new_arrivals_title">Hàng giảm giá nhiều
+                            </div>
+                            <ul class="clearfix">
+                                <li class="active">Top 10</li>
+                                <li>Phụ kiện khác</li>
+                                <li>Laptops & Máy tính</li>
+                            </ul>
+                            <div class="tabs_line"><span></span></div>
+                        </div>
+
+                        <div class="bestsellers_panel panel active">
+
+                            <!-- Best Sellers Slider -->
+
+                            <div class="bestsellers_slider slider">
+
+                                <!-- Best Sellers Item -->
+                                @foreach (var item in ViewBag.listSale)
+                                {
+
+                                    <div class="bestsellers_item discount">
+                                        <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="~/Content/images/@item.image" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div>
+                                                <div class=" bestsellers_rating">
+                                                    @{
+                                                        for (int i = 0; i < item.star; i++)
+                                                        {
+                                                            <i class="fa fa-star text-warning"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                                @if (item.sale > 0)
+                                                {
+                                                    int a = Convert.ToInt32(item.price);
+                                                    int b = Convert.ToInt32(item.sale);
+                                                    int c = a - (a * b) / 100;
+
+
+                                                    <div class="bestsellers_price discount">
+                                                        @String.Format("{0:0,0 đ}", c)
+                                                        <span>@String.Format("{0:0,0 đ}", item.price)</span>
+                                                    </div>
+
+                                                }
+                                                else
+                                                {
+                                                    <div class="bestsellers_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            @if (item.sale > 0)
+                                            {
+                                                <li class="bestsellers_mark bestsellers_discount">-@item.sale%</li>
+                                            }
+                                            @if (item._new == 1)
+                                            {
+                                                <li class="bestsellers_mark bestsellers_new">new</li>
+                                            }
+                                        </ul>
+                                    </div>
+
+                                }
+
+
+                            </div>
+                        </div>
+
+                        <div class="bestsellers_panel panel">
+
+                            <!-- Best Sellers Slider -->
+
+                            <div class="bestsellers_slider slider">
+
+                                <!-- Best Sellers Item -->
+                                @foreach (var item in ViewBag.listSaleAccess)
+                                {
+
+                                    <div class="bestsellers_item discount">
+                                        <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="~/Content/images/@item.image" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div>
+                                                <div class=" bestsellers_rating">
+                                                    @{
+                                                        for (int i = 0; i < item.star; i++)
+                                                        {
+                                                            <i class="fa fa-star text-warning"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                                @if (item.sale > 0)
+                                                {
+                                                    int a = Convert.ToInt32(item.price);
+                                                    int b = Convert.ToInt32(item.sale);
+                                                    int c = a - (a * b) / 100;
+
+
+                                                    <div class="bestsellers_price discount">
+                                                        @String.Format("{0:0,0 đ}", c)
+                                                        <span>@String.Format("{0:0,0 đ}", item.price)</span>
+                                                    </div>
+
+                                                }
+                                                else
+                                                {
+                                                    <div class="bestsellers_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            @if (item.sale > 0)
+                                            {
+                                                <li class="bestsellers_mark bestsellers_discount">-@item.sale%</li>
+                                            }
+                                            @if (item._new == 1)
+                                            {
+                                                <li class="bestsellers_mark bestsellers_new">new</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="bestsellers_panel panel">
+
+                            <!-- Best Sellers Slider -->
+
+                            <div class="bestsellers_slider slider">
+
+                                <!-- Best Sellers Item -->
+                                @foreach (var item in ViewBag.listSaleLaptop)
+                                {
+
+                                    <div class="bestsellers_item discount">
+                                        <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                            <div class="bestsellers_image"><img src="~/Content/images/@item.image" alt=""></div>
+                                            <div class="bestsellers_content">
+                                                <div class="bestsellers_category"><a href="#">Headphones</a></div>
+                                                <div class="bestsellers_name"><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div>
+                                                <div class=" bestsellers_rating">
+                                                    @{
+                                                        for (int i = 0; i < item.star; i++)
+                                                        {
+                                                            <i class="fa fa-star text-warning"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                                @if (item.sale > 0)
+                                                {
+                                                    int a = Convert.ToInt32(item.price);
+                                                    int b = Convert.ToInt32(item.sale);
+                                                    int c = a - (a * b) / 100;
+
+
+                                                    <div class="bestsellers_price discount">
+                                                        @String.Format("{0:0,0 đ}", c)
+                                                        <span>@String.Format("{0:0,0 đ}", item.price)</span>
+                                                    </div>
+
+                                                }
+                                                else
+                                                {
+                                                    <div class="bestsellers_price">@String.Format("{0:0,0 đ}", item.price)</div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                                        <ul class="bestsellers_marks">
+                                            @if (item.sale > 0)
+                                            {
+                                                <li class="bestsellers_mark bestsellers_discount">-@item.sale%</li>
+                                            }
+                                            @if (item._new == 1)
+                                            {
+                                                <li class="bestsellers_mark bestsellers_new">new</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Reviews -->
+
+    <div class="reviews">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="reviews_title_container">
+                        <h3 class="reviews_title">Ðánh giá gần dây </h3>
+                        <div class="reviews_all ml-auto"><a href="#">view all <span>reviews</span></a></div>
+                    </div>
+
+                    <div class="reviews_slider_container">
+
+                        <!-- Reviews Slider -->
+                        <div class="owl-carousel owl-theme reviews_slider">
+                            @foreach (var item in ViewBag.listReview)
+                            {
+                                <!-- Reviews Slider Item -->
+                                <div class="owl-item">
+                                    <div class="review d-flex flex-row align-items-start justify-content-start">
+                                        <div><div class="review_image"><img src="~/Content/images/@item.Image" alt=""></div></div>
+                                        <div class="review_content">
+                                            <div class="review_name">@item.Name</div>
+                                            <div class="review_rating_container">
+                                                <div class=" review_rating">
+                                                    @{
+                                                        for (int i = 0; i < item.Vote; i++)
+                                                        {
+                                                            <i class="fa fa-star text-warning"></i>
+                                                        }
+                                                     }
+                                                  </div>
+                                            </div>
+                                            <div class="review_text" style=" max-height: 90px;overflow: hidden;"><p>@item.Dicription</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="reviews_dots"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recently Viewed -->
+
+    <div class="viewed">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="viewed_title_container">
+                        <h3 class="viewed_title">Sản phẩm đề cử</h3>
+                        <div class="viewed_nav_container">
+                            <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                            <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="viewed_slider_container">
+
+                        <!-- Recently Viewed Slider -->
+
+                        <div class="owl-carousel owl-theme viewed_slider">
+
+                            <!-- Recently Viewed Item -->
+                            @foreach (var item in ViewBag.listRecent)
+                            {
+                                <div class="owl-item">
+                                    <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="~/Content/images/@item.image" alt=""></div>
+                                        <div class="viewed_content text-center">
+                                            @if (item.sale > 0)
+                                            {
+                                                int a = Convert.ToInt32(item.price);
+                                                int b = Convert.ToInt32(item.sale);
+                                                int c = a - (a * b) / 100;
+
+
+                                                <div class="viewed_price discount">
+                                                    @String.Format("{0:0,0 đ}", c) <br/>
+                                                    <span> @String.Format("{0:0,0 đ}", item.price)</span>
+                                                </div>
+
+                                            }
+                                            else
+                                            {
+                                                <div class="viewed_price"> @String.Format("{0:0,0 đ}", item.price)</div>
+                                            }
+                                            <div class="viewed_name"><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div>
+                                        </div>
+                                        <ul class="item_marks">
+                                            @if (item.sale > 0)
+                                            {
+                                                <li class="item_mark item_discount">-@item.sale%</li>
+                                            }
+                                            @if (item._new == 1)
+                                            {
+                                                <li class="item_mark item_new">new</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brands -->
+
+    <div class="brands">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="brands_slider_container">
+
+                        <!-- Brands Slider -->
+
+                        <div class="owl-carousel owl-theme brands_slider">
+
+                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_1.jpg" alt=""></div></div>
+                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_2.jpg" alt=""></div></div>
+                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_3.jpg" alt=""></div></div>
+                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_4.jpg" alt=""></div></div>
+                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_5.jpg" alt=""></div></div>
+                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_6.jpg" alt=""></div></div>
+                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_7.jpg" alt=""></div></div>
+                            <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_8.jpg" alt=""></div></div>
+
+                        </div>
+
+                        <!-- Brands Slider Navigation -->
+                        <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

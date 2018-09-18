@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+}
+<head>
+
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/cart_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/cart_responsive.css">
+</head>
+<!-- Cart -->
+
+<div class="cart_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="cart_container">
+                    <div class="cart_title">Giỏ hàng của bạn</div>
+
+                    <div class="cart_items">
+                        <ul class="cart_list">
+
+                            @{ int totalMonney = 0;
+                                if (ViewBag.Cart != null)
+                                {
+
+
+                                    foreach (var item in ViewBag.Cart)
+                                    {
+                                        int total = item.SoLuong * item.DonGia;
+
+                                        <li class="cart_item clearfix">
+                                            <div class="cart_item_image"><img src="~/Content/images/@item.Hinh" alt=""></div>
+                                            <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                                <div class="cart_item_name cart_info_col" style="min-width:150px;">
+                                                    <div class="cart_item_title">Tên sản phẩm</div>
+                                                    <div class="cart_item_text">@item.TenSanPham</div>
+                                                </div>
+                                                <div class="cart_item_quantity cart_info_col">
+                                                    <div class="cart_item_title">Số lượng</div>
+                                                    <div class="cart_item_text">@item.SoLuong</div>
+                                                </div>
+                                                <div class="cart_item_price cart_info_col">
+                                                    <div class="cart_item_title">Giá sản phẩm</div>
+                                                    <div class="cart_item_text">@String.Format("{0:0,0 đ}",item.DonGia)</div>
+                                                </div>
+                                                <div class="cart_item_total cart_info_col">
+                                                    <div class="cart_item_title">Tổng tiền</div>
+                                                    <div class="cart_item_text">@total đ</div>
+                                                </div>
+                                                <div class="cart_item_total cart_info_col">
+                                                    <div class="cart_item_title">Xoá</div>
+                                                    <div class="cart_item_text">
+                                                        <a href="@Url.Action("XoaKhoiGio","Cart",new { SanPhamID = item.SanPhamID})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">
+                                                            <i class="fa">&#xf00d;</i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        totalMonney = totalMonney + (item.SoLuong * item.DonGia);
+                                    }
+                                }
+                                else
+                                {
+                                    <li class="cart_item clearfix">
+                                        <div class=" cart_info_col">
+                                            <div class="cart_item_title">Bạn chưa mua sản phẩm nào.</div>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <!-- Order Total -->
+                    <div class="order_total">
+                        <div class="order_total_content text-md-right">
+                            <div class="order_total_title">Tổng tiền thanh toán:</div>
+                            <div class="order_total_amount">@String.Format("{0:0,0 đ}",totalMonney)</div>
+                        </div>
+                    </div>
+
+                    <div class="cart_buttons">
+                        <a href="@Url.Action("Index")" class="button cart_button_clear">Tiếp tục mua hàng</a>
+                        <a href="@Url.Action("Cart")" class="button cart_button_checkout">Thanh toán</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

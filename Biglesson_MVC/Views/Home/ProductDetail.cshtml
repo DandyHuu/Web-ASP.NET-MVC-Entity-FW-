@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+<!-- Single Product -->
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/product_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/product_responsive.css">
+
+</head>
+<div class="single_product">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in ViewBag.ProductDetail)
+            {
+                <!-- Images -->
+                <div class="col-lg-2 order-lg-1 order-2">
+                    <ul class="image_list">
+                        <li data-image="../../Content/images/@item.image"><img src="~/Content/images/@item.image" alt=""></li>
+                        @foreach (var img in ViewBag.ProductPhoto)
+                        {
+                            <li data-image="../../Content/images/@img.image"><img src="~/Content/images/@img.image" alt=""></li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Selected Image -->
+                <div class="col-lg-5 order-lg-2 order-1">
+                    <div class="image_selected"><img src="~/Content/images/@item.image" alt=""></div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-lg-5 order-3">
+                    <div class="product_description">
+                        <div class="product_category">Laptops</div>
+                        <div class="product_name">@item.name_product</div>
+                        <div class="product_rating">
+                              @{ 
+                                  for (int i = 0; i < item.star; i++)
+                                  {
+                            <i class="fa fa-star text-warning"></i>
+                                  }
+                              }
+                        </div>
+                        <div class="product_text"><p>@item.dicription</p></div>
+                        <div class="order_info d-flex flex-row">
+                            <form action="#">
+                                <div class="clearfix" style="z-index: 1000;">
+
+                                    <!-- Product Quantity -->
+                                    <div class="product_quantity clearfix">
+                                        <span>Quantity: </span>
+                                        <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+                                        <div class="quantity_buttons">
+                                            <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
+                                            <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
+                                        </div>
+                                    </div>
+                                    <!-- Product Color -->
+                                    <ul class="product_color" style="visibility: inherit; opacity: 1; margin-top:0px;">
+                                        <li>
+                                            <span>Color: </span>
+                                            <div class="color_mark_container"><div id="selected_color" class="color_mark"></div></div>
+                                            <div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
+
+                                            <ul class="color_list">
+                                                <li><div class="color_mark" style="background: #999999;"></div></li>
+                                                <li><div class="color_mark" style="background: #b19c83;"></div></li>
+                                                <li><div class="color_mark" style="background: #000000;"></div></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+
+                                @if (item.sale > 0)
+                                {
+                                    int a = Convert.ToInt32(item.price);
+                                    int b = Convert.ToInt32(item.sale);
+                                    int c = a - (a * b) / 100;
+
+
+                                    <div class="product_price discount">
+                                        @String.Format("{0:0,0 đ}", c)
+                                        <span>@String.Format("{0:0,0 đ}",item.price)</span>
+                                    </div>
+
+                                }
+                                else
+                                {
+                                    <div class="product_price">@String.Format("{0:0,0 đ}",item.price)</div>
+                                }
+
+                                <div class="button_container">
+                                    <a href="@Url.Action("Add","Cart",new {SanPhamID = item.id })" class="btn button cart_button">Thêm vào giỏ</a>
+                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Recently Viewed -->
+
+<div class="viewed">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="viewed_title_container">
+                    <h3 class="viewed_title">Sản phẩm đề cử</h3>
+                    <div class="viewed_nav_container">
+                        <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="viewed_slider_container">
+
+                    <!-- Recently Viewed Slider -->
+
+                    <div class="owl-carousel owl-theme viewed_slider">
+
+                        <!-- Recently Viewed Item -->
+                        @foreach (var item in ViewBag.listRecent)
+                        {
+                            <div class="owl-item">
+                                <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                    <div class="viewed_image"><img src="~/Content/images/@item.image" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        @if (item.sale > 0)
+                                        {
+                                            int a = Convert.ToInt32(item.price);
+                                            int b = Convert.ToInt32(item.sale);
+                                            int c = a - (a * b) / 100;
+
+
+                                            <div class="viewed_price discount">
+                                                @String.Format("{0:0,0 đ}", c) <br/>
+                                                <span> - @String.Format("{0:0,0 đ}",item.price)</span>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="viewed_price"> @String.Format("{0:0,0 đ}",item.price)</div>
+                                        }
+                                        <div class="viewed_name"><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        @if (item.sale > 0)
+                                        {
+                                            <li class="item_mark item_discount">-@item.sale%</li>
+                                        }
+                                        @if (item._new == 1)
+                                        {
+                                            <li class="item_mark item_new">new</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Brands -->
+
+<div class="brands">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="brands_slider_container">
+
+                    <!-- Brands Slider -->
+
+                    <div class="owl-carousel owl-theme brands_slider">
+
+                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_1.jpg" alt=""></div></div>
+                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_2.jpg" alt=""></div></div>
+                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_3.jpg" alt=""></div></div>
+                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_4.jpg" alt=""></div></div>
+                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_5.jpg" alt=""></div></div>
+                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_6.jpg" alt=""></div></div>
+                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_7.jpg" alt=""></div></div>
+                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="~/Content/images/brands_8.jpg" alt=""></div></div>
+
+                    </div>
+
+                    <!-- Brands Slider Navigation -->
+                    <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
+                    <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

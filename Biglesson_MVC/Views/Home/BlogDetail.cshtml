@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "BlogDetail";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/blog_single_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/blog_single_responsive.css">
+</head>
+<!-- Home -->
+
+<div class="home">
+    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="../../Content/images/blog_single_background.jpg"></div>
+    <div class="home_overlay"></div>
+    <div class="home_content d-flex flex-column align-items-center justify-content-center">
+        <h2 class="home_title">@ViewBag.Message</h2>
+    </div>
+</div>
+
+<!-- Single Blog Post -->
+
+<div class="single_post">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in ViewBag.listBlog)
+            {
+
+
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="single_post_title text-center">@item.title</div>
+                    <div class="single_post_text">
+                        <p> @item.dicription</p>
+                        <div class="single_post_quote text-center">
+                            <div class="quote_image"><img style="width: 100%;" src="~/Content/images/@item.image" alt=""></div>
+                            <div class="quote_text">Quisque sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat. Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus.</div>
+                            <div class="quote_name">@item.author</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Blog Posts -->
+
+<div class="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="blog_posts d-flex flex-row align-items-start justify-content-between">
+
+                    <!-- Blog post -->
+                    @foreach (var item in ViewBag.listBlogs)
+                    {
+
+                        <div class="blog_post">
+                            <div class="blog_image" style=" background-image:url(../../Content/images/@item.image); "></div>
+                            <div class="blog_text">@item.title</div>
+                            <div class="blog_button"><a href="@Url.Action("BlogDetail",new { ID = item.id })">Chi tiết</a></div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

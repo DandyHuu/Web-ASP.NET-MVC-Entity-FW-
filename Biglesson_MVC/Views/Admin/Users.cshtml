@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>
+        Người dùng
+        <small>Danh sách người dùng</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li class="active">Người dùng</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Danh sách sản phẩm</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Mật khẩu</th>
+                                <th>Tên người dùng</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Quên quán</th>
+                                <th>Tác vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                int index = 1;
+                                for (int i = 0; i < ViewBag.listUser.Count; i++)
+                                {
+                            <tr>
+
+                                <td>@index</td>
+
+                                <td>
+                                    @ViewBag.listUser[i].userName
+                                </td>
+                                <td>
+                                    *************
+                                </td>
+                                <td>
+                                    @ViewBag.listUser[i].name
+                                </td>
+                                <td>
+                                    @ViewBag.listUser[i].phone
+                                </td>
+                                <td>
+                                    @ViewBag.listUser[i].email
+
+                                </td>
+                                <td>
+                                    @ViewBag.listUser[i].address
+
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("UserEdit","CRUD",new { id = ViewBag.listUser[i].id })" class="btn btn-sm btn-warning">Sửa</a>
+                                    <a href="@Url.Action("DeleteUser","CRUD",new { ID = ViewBag.listUser[i].id })" class="btn btn-sm btn-danger">Xóa</a>
+                                </td>
+                            </tr>
+                                    index++;
+
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Mật khẩu</th>
+                                <th>Tên người dùng</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Quên quán</th>
+                                <th><a href="#" class="btn btn-sm btn-success">Thêm mới</a></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+

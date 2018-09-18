@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Blogs";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>
+        Tin tức
+        <small>Danh sách tin tức</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li class="active">Tin tức</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Danh sách sản phẩm</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Title</th>
+                                <th>Bài viết</th>
+                                <th>Ảnh</th>
+                                <th>Người đăng</th>
+                                <th>Tác vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                int index = 1;
+                                for (int i = 0; i < ViewBag.listBlog.Count; i++)
+                                {
+                            <tr>
+
+                                <td>@index</td>
+
+                                <td>
+                                   @ViewBag.listBlog[i].title
+                                </td>
+                                <td style="overflow:hidden;">
+                                    @ViewBag.listBlog[i].dicription
+                                </td>
+                                <td>
+                                    <img  src="~/Content/images/@ViewBag.listBlog[i].image" >
+                                </td>
+                                <td style="width:10% !important;">
+                                    @ViewBag.listBlog[i].author
+                                </td>
+                                <td style="width:10% !important;">
+                                    <a href="@Url.Action("BlogEdit","CRUD",new { id = ViewBag.listBlog[i].id })" class="btn btn-sm btn-warning">Sửa</a>
+                                    <a href="@Url.Action("DeleteBlog","CRUD",new { ID = ViewBag.listBlog[i].id })" class="btn btn-sm btn-danger">Xóa</a>
+                                </td>
+                            </tr>
+                                    index++;
+
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>STT</th>
+                                <th>Title</th>
+                                <th>Bài viết</th>
+                                <th>Ảnh</th>
+                                <th>Người đăng</th>
+                                <th><a href="@Url.Action("BlogCreate","CRUD")" class="btn btn-sm btn-success">Thêm mới</a></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+

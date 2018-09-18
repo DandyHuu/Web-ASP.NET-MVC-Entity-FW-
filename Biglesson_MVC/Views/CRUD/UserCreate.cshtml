@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "UserCreate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <style>
+        input {
+            max-width: 600px;
+        }
+
+        textarea {
+            max-width: 600px;
+        }
+    </style>
+</head>
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Thêm mới:</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="@Url.Action("AddUser","CRUD")" method="post">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">ID</label>
+                    <input type="text" class="form-control " name="id_User">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Tên đăng nhập</label>
+                    <input type="text" class="form-control" name="userName_User">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Mật khẩu</label>
+                    <input type="text" class="form-control" name="pass_User">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Tên người dùng</label>
+                    <input type="text" class="form-control" name="name_User">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Số điện thoại</label>
+                    <input type="text" class="form-control" name="phone_User">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Email</label>
+                    <input type="text" class="form-control" name="email_User">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Quê quán</label>
+                    <input type="text" class="form-control" name="address_User">
+                </div>
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Thêm mới</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+

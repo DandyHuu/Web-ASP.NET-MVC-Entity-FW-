@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Blog";
+}
+<head>
+    <!-- Blog -->
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/blog_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/blog_responsive.css"> 
+</head>
+<!-- Home -->
+
+<div class="home">
+    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="../../Content/images/shop_background.jpg"></div>
+    <div class="home_overlay"></div>
+    <div class="home_content d-flex flex-column align-items-center justify-content-center">
+        <h2 class="home_title">@ViewBag.Message</h2>
+    </div>
+</div>
+
+<!-- Blog -->
+
+<div class="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="blog_posts d-flex flex-row align-items-start justify-content-between">
+
+                    <!-- Blog post -->
+                    @foreach (var item in ViewBag.listBlog)
+                    {
+                        <div class="blog_post">
+                            <div class="blog_image" style="height: 200px; background-image:url(../../Content/images/@item.image)"></div>
+                            <div class="blog_text">@item.title</div>
+                            <div class="blog_button"><a href="@Url.Action("BlogDetail",new { ID = item.id })">Chi tiết</a></div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

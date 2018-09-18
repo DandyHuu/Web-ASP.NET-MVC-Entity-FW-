@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "ProductEdit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <style>
+        input {
+            max-width: 600px;
+        }
+    </style>
+</head>
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Thêm mới sản phẩm</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="@Url.Action("ProductEdit","CRUD")" method="post">
+            <div class="box-body">
+                @foreach (var item in ViewBag.listProID)
+                {
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tên sản phẩm</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên sản phẩm" value="@item.name_product">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Danh mục</label>
+                        <select name="cateProduct" class="form-control">
+
+                            @foreach (var val in ViewBag.listCate)
+                            {
+                                if (val.id == item.cate_id)
+                                {
+                                    <option value="@val.id">@val.name</option>
+                                }
+                                if (val.id != item.cate_id)
+                                {
+                                    <option value="@val.id">@val.name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Đơn giá (đ)</label>
+                        <input type="number" class="form-control" name="priceProduct" value="@item.price" placeholder="Nhập giá" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">File ảnh</label>
+                        <input type="file" id="exampleInputFile" name="imgProduct">
+
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="newProduct"> là hàng mới nhập ?
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Sale (%)</label>
+                        <input type="number" class="form-control" name="saleProduct" placeholder="Nhập mức sale" value="@item.sale">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Đánh giá ban đầu (<i class="fa fa-star text-warning"></i>) </label>
+                        <select name="cateProduct" class="form-control" style="width:100px;">
+                            <option value="1"> 1  </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Số lượng</label>
+                        <input type="number" class="form-control" name="quantityProduct" value="@item.quantity" placeholder="Nhập số lượng">
+                    </div>
+                }
+
+            </div>
+            <!-- /.box-body -->
+                            
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Sửa đổi</button>
+                <a href="@Url.Action("Products","Admin")" class="btn btn-danger">Hủy</a>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+

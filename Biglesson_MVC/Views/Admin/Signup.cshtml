@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/_LayoutLoginLogout.cshtml";
+}
+
+<div class="signup-page-main">
+    <div class="signup-main">
+        
+        <div class="signup-head" style="background: url(../../Content/images/login.jpg)no-repeat;" >
+            <h1>Đăng ký</h1>
+        </div>
+        <div class="signup-block">
+            <form>
+                <input style="max-width: 550px;" type="text" name="email" placeholder="Tên của bạn" required="">
+                <input style="max-width: 550px;" type="text" name="email" placeholder="Email" required="">
+                <input style="max-width: 550px;" type="text" name="email" placeholder="Địa chỉ" required="">
+                <input style="max-width: 550px;" type="text" name="email" placeholder="Số điện thoại" required="">
+                <input style="max-width: 550px;" type="text" name="email" placeholder="Tài khoản" required="">
+                <input style="max-width: 550px;" type="password" name="password" class="lock" placeholder="Mật khẩu">
+                <div class="forgot-top-grids">
+                    <div class="forgot-grid">
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="brand1" value="">
+                                <label for="brand1"><span></span>Tôi đồng ý với điều khoản sử dụng</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="clearfix"> </div>
+                </div>
+                <input type="submit" name="Sign In" value="Đăng ký">
+            </form>
+            <div class="sign-down">
+                <h4>Bạn đã có tài khoản ? <a href="@Url.Action("Login","Admin")"> Đăng nhập ngay</a></h4>
+                <h5><a href="@Url.Action("Index","Home")">Quay lại trang chủ</a></h5>
+            </div>
+        </div>
+    </div>
+</div>
+

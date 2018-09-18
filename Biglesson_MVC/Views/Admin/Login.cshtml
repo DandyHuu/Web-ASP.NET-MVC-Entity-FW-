@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLoginLogout.cshtml";
+}
+
+<div class="login-page">
+    <div class="login-main">
+        <div class="login-head" style="background: url(../../Content/images/login.jpg)no-repeat;" >
+            <h1>Đăng nhập</h1>
+        </div>
+        <div class="login-block">
+            <form action="@Url.Action("CheckLogin","Admin")" method="post">
+                <input style="max-width: 550px; margin-bottom: 5px; " type="text" name="name" placeholder="Tên đăng nhập" value="@ViewBag.Uservalue" required="">
+                <p class="text-danger" style="font-size:14px; margin-bottom: 25px;">@ViewBag.ErorrUser</p>
+                <input style="max-width: 550px; margin-bottom: 5px;" type="password" name="password"  class="lock" placeholder="Mật khẩu">
+                <p class="text-danger"  style="font-size:14px; margin-bottom: 25px;">@ViewBag.ErorrPass</p>
+                <div class="forgot-top-grids">
+                    <div class="forgot-grid">
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="brand1" value="">
+                                <label for="brand1"><span></span>Nhớ mật khẩu</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="clearfix"> </div>
+                </div>
+                <input type="submit" name="Sign In" value="Đăng nhập">
+                <h3>Không có tài khoản ?<a href="@Url.Action("Signup","Admin")">Đăng ký ngay</a></h3>
+                <h2>hoặc đăng nhập với</h2>
+                <div class="login-icons">
+                    <ul>
+                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
+                    </ul>
+                </div>
+            </form>
+            <h5><a href="@Url.Action("Index","Home")">Quay lại trang chủ</a></h5>
+        </div>
+    </div>
+</div>
+
