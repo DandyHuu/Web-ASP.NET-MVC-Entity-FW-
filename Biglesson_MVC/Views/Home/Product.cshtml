@@ -92,7 +92,7 @@
                             </ul>
                         </div>
                     </div>
-
+                   
                     <div class="product_grid">
                         <div class="product_grid_border"></div>
 
@@ -148,15 +148,33 @@
                     <!-- Shop Page Navigation -->
 
                     <div class="shop_page_nav d-flex flex-row">
-                        <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
-                        <ul class="page_nav d-flex flex-row">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">21</a></li>
-                        </ul>
-                        <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+                        @if ( ViewBag.CountPro <= 17)
+                        {
+                            <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
+                            <ul class="page_nav d-flex flex-row">
+                                <li><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat , page = 0})">1</a></li>
+                            </ul>
+                            <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+                        }
+                        else if (ViewBag.CountPro > 17 && ViewBag.CountPro <= 34)
+                        {
+                            <div class="page_prev d-flex flex-column align-items-center justify-content-center"><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat, page = 0})"><i class="fas fa-chevron-left"></i></a></div>
+                            <ul class="page_nav d-flex flex-row">
+                                <li><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat , page = 0})">1</a></li>
+                                <li><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat , page = 1})">2</a></li>
+                            </ul>
+                            <div class="page_next d-flex flex-column align-items-center justify-content-center"><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat , page = 1})"><i class="fas fa-chevron-right"></i></a></div>
+                        }
+                        else if (ViewBag.CountPro > 34)
+                        {
+                            <div class="page_prev d-flex flex-column align-items-center justify-content-center"><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat , page = 0})"><i class="fas fa-chevron-left"></i></a></div>
+                            <ul class="page_nav d-flex flex-row">
+                                <li><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat , page = 0})">1</a></li>
+                                <li><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat , page = 1})">2</a></li>
+                                <li><a href="@Url.Action("Product","Home",new { flat =  ViewBag.flat , page = 2})">3</a></li>
+                            </ul>
+                            <div class="page_next d-flex flex-column align-items-center justify-content-center"><a href="@Url.Action("Product","Home",new {flat =  ViewBag.flat , page = 2})"><i class="fas fa-chevron-right"></i></a></div>
+                        }
                     </div>
 
                 </div>

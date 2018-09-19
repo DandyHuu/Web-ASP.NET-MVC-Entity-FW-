@@ -188,3 +188,7 @@ C:\Users\admin\source\repos\Biglesson_MVC\Biglesson_MVC\obj\Debug\Biglesson_MVC.
 C:\Users\admin\source\repos\Biglesson_MVC\Biglesson_MVC\obj\Debug\Biglesson_MVC.csproj.CopyComplete
 C:\Users\admin\source\repos\Biglesson_MVC\Biglesson_MVC\obj\Debug\Biglesson_MVC.dll
 C:\Users\admin\source\repos\Biglesson_MVC\Biglesson_MVC\obj\Debug\Biglesson_MVC.pdb
+C:\Users\admin\source\repos\Biglesson_MVC\Biglesson_MVC\bin\PagedList.dll
+C:\Users\admin\source\repos\Biglesson_MVC\Biglesson_MVC\bin\PagedList.Mvc.dll
+C:\Users\admin\source\repos\Biglesson_MVC\Biglesson_MVC\bin\PagedList.xml
+C:\Users\admin\source\repos\Biglesson_MVC\Biglesson_MVC\bin\PagedList.Mvc.xml

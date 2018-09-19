@@ -5,10 +5,10 @@ namespace Biglesson_MVC.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Modelhitech : DbContext
+    public partial class Model_HiTech : DbContext
     {
-        public Modelhitech()
-            : base("name=Modelhitech")
+        public Model_HiTech()
+            : base("name=Model_HiTech")
         {
         }
 
@@ -42,6 +42,10 @@ namespace Biglesson_MVC.Models
                 .WithRequired(e => e.Category)
                 .HasForeignKey(e => e.cate_id)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.time)
+                .IsFixedLength();
 
             modelBuilder.Entity<Order>()
                 .HasMany(e => e.OrderDetails)
@@ -108,6 +112,10 @@ namespace Biglesson_MVC.Models
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.user_id);
 
+            modelBuilder.Entity<View>()
+                .Property(e => e.time)
+                .IsFixedLength();
+
             modelBuilder.Entity<Review>()
                 .Property(e => e.email)
                 .IsUnicode(false);
@@ -115,6 +123,10 @@ namespace Biglesson_MVC.Models
             modelBuilder.Entity<Review>()
                 .Property(e => e.phone)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Review>()
+                .Property(e => e.time)
+                .IsFixedLength();
         }
     }
 }

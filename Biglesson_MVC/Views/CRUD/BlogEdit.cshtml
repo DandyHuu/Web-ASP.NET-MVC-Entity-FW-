@@ -26,36 +26,36 @@
             @foreach (var item in ViewBag.listBlog)
             {
 
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">ID</label>
-                        <input type="text" class="form-control " name="id_Blog" disabled value="@item.id">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Title</label>
-                        <input type="text" class="form-control" name="title_Blog" value="@item.title">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Bài viết</label>
-                        <textarea class="form-control" rows="7" name="dicription_Blog" >@item.dicription</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Hình ảnh</label>
-                        <input type="file" name="img_Blog" value="" />
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Người đăng</label>
-                        <input type="text" class="form-control" name="author_Blog" value="@item.author">
-                    </div>
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">ID</label>
+                    <input type="text" class="form-control " name="id_Blog" disabled value="@item.id">
                 </div>
-                <!-- /.box-body -->
-            }
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Title</label>
+                    <input type="text" class="form-control" name="title_Blog" value="@item.title">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Bài viết</label>
+                    <textarea class="form-control" rows="7" name="dicription_Blog">@item.dicription</textarea>
+                </div>
+                <!--  <div class="form-group">
+            <label for="exampleInputPassword1">Hình ảnh</label>
+            <input type="file" name="nameFile" id="nameFile" />
+        </div>-->
+        <div class="form-group">
+            <label for="exampleInputPassword1">Người đăng</label>
+            <input type="text" class="form-control" name="author_Blog" value="@item.author">
+        </div>
+    </div>
+    <!-- /.box-body -->
+                }
 
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Sửa đổi</button>
                     <a href="@Url.Action("Blogs","Admin")" class="btn btn-danger">Hủy</a>
                 </div>
-        </form>
+</form>
     </div>
 </section>
 

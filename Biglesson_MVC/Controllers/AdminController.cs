@@ -10,7 +10,7 @@ namespace Biglesson_MVC.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        private Modelhitech db = new Modelhitech();
+        private Model_HiTech db = new Model_HiTech();
 
         public ActionResult Index(int ID = 0)
         {
@@ -95,10 +95,26 @@ namespace Biglesson_MVC.Controllers
             }
             ViewBag.listOrderDetail = listOrderItem;
             //end//
+            //Review//
+            List<Review> review = new List<Review>();
+            review = (from rw in db.Reviews select rw).ToList();
+            ViewBag.listReview = review.OrderByDescending(x=>x.id);
 
-
+            
             ViewBag.Message = "Admin";
             return View();
+        }
+        public RedirectToRouteResult DeleteReview(int ID)
+        {
+            Review re = db.Reviews.SingleOrDefault(x => x.id == ID);
+
+            if (re != null)
+            {
+                db.Reviews.Remove(re);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index","Admin");
         }
 
         public ActionResult Login(int check = 5 )
@@ -128,12 +144,46 @@ namespace Biglesson_MVC.Controllers
             return View();
         }
 
+        public RedirectToRouteResult Logout()
+        {
+            Session.Abandon();
+
+            return RedirectToAction("Index","Home");
+        }
+        [HttpGet]
         public ActionResult Signup()
         {
+            ViewBag.mess = "";
             ViewBag.Message = "Đăng ký";
             return View();
         }
+        [HttpPost]
+        public RedirectToRouteResult Signup(FormCollection collection)
+        {
+            
+            string Name = collection["name"];
+            string user_name = collection["user_name"];
+            string Pass = collection["password"];
+            string Phone = collection["phone"];
+            string Email = collection["email"];
+            string Address = collection["address"];
 
+            User newItem = new User()
+            {
+                name = Name,
+                userName = user_name,
+                pass = Pass,
+                phone = Phone,
+                email = Email,
+                address = Address
+            };
+
+            db.Users.Add(newItem);
+            db.SaveChanges();
+
+            ViewBag.mess = "Bạn đã đăng kí thành công !";
+            return RedirectToAction("Signup", "Admin");
+        }
         public RedirectToRouteResult CheckLogin()
         {
             string user_name = Request.Form["name"];

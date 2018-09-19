@@ -9,7 +9,7 @@ namespace Biglesson_MVC.Controllers
 {
     public class CartController : Controller
     {
-        private Modelhitech db = new Modelhitech();
+        private Model_HiTech db = new Model_HiTech();
         // GET: Cart
         public RedirectToRouteResult Index()
         {
@@ -82,5 +82,53 @@ namespace Biglesson_MVC.Controllers
             return RedirectToAction("Cart","Home");
         }
 
+
+        public RedirectToRouteResult ThanhToan()
+        {
+            string Name = Request.Form["name"];
+            string Phone = Request.Form["phone"];
+            string Address = Request.Form["address"];
+            int Total = Convert.ToInt32(Request.Form["total"]);
+
+            List<CartItem> giohang = Session["giohang"] as List<CartItem>;
+            ViewBag.Cart = giohang;
+
+            User newUser = new User()
+            {
+                name = Name,
+                phone = Phone,
+                address = Address,
+            };
+            db.Users.Add(newUser);
+            db.SaveChanges();
+
+
+            User user = db.Users.LastOrDefault();
+            
+            Order newOder = new Order()
+            {
+               user_id = user.id,
+               totalOrder = Total,
+
+            };
+            db.Orders.Add(newOder);
+            db.SaveChanges();
+
+
+            Order order = db.Orders.LastOrDefault();
+            for (int i = 0; i < giohang.Count; i++)
+            {
+                OrderDetail newOrderDetail = new OrderDetail()
+                {
+                    order_id = order.id,
+                    product_id = giohang[i].SanPhamID
+                };
+                db.OrderDetails.Add(newOrderDetail);
+                db.SaveChanges();
+            }
+
+            ViewBag.Succ = "Bạn đã đặt hàng thành công!";
+            return RedirectToAction("Cart", "Cart");
+        }
     }
 }

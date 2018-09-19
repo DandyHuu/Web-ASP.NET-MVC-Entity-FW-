@@ -10,7 +10,7 @@ namespace Biglesson_MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private Modelhitech db = new Modelhitech();
+        private Model_HiTech db = new Model_HiTech();
         public List<Category> cate = new List<Category>();
         public List<Brand> brand = new List<Brand>();
        
@@ -120,7 +120,7 @@ namespace Biglesson_MVC.Controllers
 
         }
 
-        public ActionResult Product(int flat, string search = null, int ID = 0)
+        public ActionResult Product(int flat, string search = null, int ID = 0, int page = 0 , int pageSize = 17)
         {
             
             //Danh mục//
@@ -136,12 +136,27 @@ namespace Biglesson_MVC.Controllers
             
             if (flat == 0)
             {
-                //Tất cả sản phẩm//
-                List<Product> Pro = new List<Product>();
-                Pro = (from product in db.Products select product).ToList();
-                ViewBag.listPro = Pro;
-                ViewBag.CountPro = Pro.Count();
-                ViewBag.Message = "Tất cả sản phẩm";
+                if (page == 0)
+                {
+                    //Tất cả sản phẩm//
+                    List<Product> Pro = new List<Product>();
+                    Pro = (from product in db.Products select product).ToList();
+                    ViewBag.listPro = Pro.Take(pageSize);
+                    ViewBag.CountPro = Pro.Count();
+                    ViewBag.flat = flat;
+                    ViewBag.Message = "Tất cả sản phẩm";
+                }
+
+                else if (page == 1 || page ==2 || page == 3)
+                {
+                    //Tất cả sản phẩm//
+                    List<Product> Pro = new List<Product>();
+                    Pro = (from product in db.Products select product).ToList();
+                    ViewBag.listPro = Pro.Skip(14*page).Take(pageSize);
+                    ViewBag.CountPro = Pro.Count();
+                    ViewBag.Message = "Tất cả sản phẩm";
+                    ViewBag.flat = flat;
+                }
             }
             else if (flat == 1 && search != "" && ID == 0)
             {
@@ -149,8 +164,9 @@ namespace Biglesson_MVC.Controllers
                 search = Request.Form["search"];
                 List<Product> Pro = new List<Product>();
                 Pro = (from product in db.Products where product.name_product.Contains(search) select product).ToList();
-                ViewBag.listPro = Pro;
+                ViewBag.listPro = Pro.Skip(14 * page).Take(pageSize); 
                 ViewBag.CountPro = Pro.Count();
+                ViewBag.flat = flat;
                 ViewBag.Message = "Tìm kiếm :"+ search;
             }
             else if (flat == 2 && search == null && ID != 0)
@@ -162,8 +178,9 @@ namespace Biglesson_MVC.Controllers
                 List<Category> Cate = new List<Category>();
                 Cate = (from cate in db.Categories where cate.id == ID select cate).ToList();
 
-                ViewBag.listPro = Pro;
+                ViewBag.listPro = Pro.Skip(14 * page).Take(pageSize);
                 ViewBag.CountPro = Pro.Count();
+                ViewBag.flat = flat;
                 foreach (var item in Cate)
                 {
                     ViewBag.Message =  item.name;
@@ -179,7 +196,8 @@ namespace Biglesson_MVC.Controllers
                 List<Brand> brandID = new List<Brand>();
                 brandID = (from brand in db.Brands where brand.id == ID select brand).ToList();
 
-                ViewBag.listPro = Pro;
+                ViewBag.listPro = Pro.Skip(14 * page).Take(pageSize);
+                ViewBag.flat = flat;
                 ViewBag.CountPro = Pro.Count();
                 foreach (var item in brandID)
                 {
@@ -204,6 +222,7 @@ namespace Biglesson_MVC.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult ProductDetail( int ID)
         {
             //Danh mục//
@@ -237,10 +256,74 @@ namespace Biglesson_MVC.Controllers
             //Session User//
             List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
             ViewBag.listUserSession = UserSession;
+            //Đánh giá /
+
+            List<View> view = new List<View>();
+            view = (from v in db.Views where v.product_id == ID select v).ToList();
+            ViewBag.listView = view;
 
             return View();
         }
 
+       [HttpPost]
+        public ActionResult ProductDetail(int ID, FormCollection collection)
+        {
+            //Danh mục//
+            List<Category> Categories = new List<Category>();
+            Categories = (from cate in db.Categories select cate).ToList();
+            ViewBag.listCategories = Categories;
+
+            //Hãng//
+            List<Brand> Brands = new List<Brand>();
+            Brands = (from brand in db.Brands select brand).ToList();
+            ViewBag.listBrands = Brands;
+
+            //Sản phẩm đề cử//
+            List<Product> Recent = new List<Product>();
+            Recent = (from product in db.Products where product._new == 1 && product.star == 5 select product).ToList();
+            ViewBag.listRecent = Recent.Take(8);
+
+            //Chi tiết sản phẩm//
+            List<Product> ProductDetail = new List<Product>();
+            ProductDetail = (from product in db.Products where product.id == ID select product).ToList();
+            ViewBag.ProductDetail = ProductDetail;
+
+            List<Photo> ProductPhoto = new List<Photo>();
+            ProductPhoto = (from photo in db.Photos where photo.product_id == ID select photo).ToList();
+            ViewBag.ProductPhoto = ProductPhoto;
+
+            //Giỏ Hàng//
+            List<CartItem> giohang = Session["giohang"] as List<CartItem>;
+            ViewBag.Cart = giohang;
+
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
+            
+            int Product_id = ID;
+            string Name = collection["name"];
+            int Vote = Convert.ToInt16(collection["vote"]);
+            string Comment = collection["comment"];
+            View newItem = new View()
+            {
+                name = Name,
+                vote = Vote,
+                comment = Comment,
+                product_id = Product_id
+            };
+
+            db.Views.Add(newItem);
+            db.SaveChanges();
+
+            //Đánh giá /
+
+            List<View> view = new List<View>();
+            view = (from v in db.Views where v.product_id == ID select v).ToList();
+            ViewBag.listView = view;
+
+
+            return View();
+        }
         public ActionResult About()
         {
             //Danh mục//
@@ -268,6 +351,7 @@ namespace Biglesson_MVC.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Contact()
         {
             //Danh mục//
@@ -290,6 +374,50 @@ namespace Biglesson_MVC.Controllers
             List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
             ViewBag.listUserSession = UserSession;
 
+            ViewBag.sussess = "";
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Contact(FormCollection collection)
+        {
+            //Danh mục//
+            List<Category> Categories = new List<Category>();
+            Categories = (from cate in db.Categories select cate).ToList();
+            ViewBag.listCategories = Categories;
+
+            //Hãng//
+            List<Brand> Brands = new List<Brand>();
+            Brands = (from brand in db.Brands select brand).ToList();
+            ViewBag.listBrands = Brands;
+
+            ViewBag.Message = "Your contact page.";
+
+            //Giỏ Hàng//
+            List<CartItem> giohang = Session["giohang"] as List<CartItem>;
+            ViewBag.Cart = giohang;
+
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
+
+
+            string Name = collection["name"];
+            string Email = collection["email"];
+            string Phone = collection["phone"];
+            string Mess = collection["message"];
+
+            Review newItem = new Review()
+            {
+                name = Name,
+                email = Email,
+                phone = Phone,
+                dicription = Mess
+            };
+            db.Reviews.Add(newItem);
+            db.SaveChanges();
+
+            ViewBag.sussess = "Bạn đã gửi đánh giá";
             return View();
         }
 

@@ -36,12 +36,12 @@
                         <div class="product_category">Laptops</div>
                         <div class="product_name">@item.name_product</div>
                         <div class="product_rating">
-                              @{ 
-                                  for (int i = 0; i < item.star; i++)
-                                  {
-                            <i class="fa fa-star text-warning"></i>
-                                  }
-                              }
+                            @{
+                                for (int i = 0; i < item.star; i++)
+                                {
+                                    <i class="fa fa-star text-warning"></i>
+                                }
+                            }
                         </div>
                         <div class="product_text"><p>@item.dicription</p></div>
                         <div class="order_info d-flex flex-row">
@@ -84,13 +84,13 @@
 
                                     <div class="product_price discount">
                                         @String.Format("{0:0,0 đ}", c)
-                                        <span>@String.Format("{0:0,0 đ}",item.price)</span>
+                                        <span>@String.Format("{0:0,0 đ}", item.price)</span>
                                     </div>
 
                                 }
                                 else
                                 {
-                                    <div class="product_price">@String.Format("{0:0,0 đ}",item.price)</div>
+                                    <div class="product_price">@String.Format("{0:0,0 đ}", item.price)</div>
                                 }
 
                                 <div class="button_container">
@@ -107,6 +107,87 @@
     </div>
 </div>
 
+<!-- Comment -->
+<div class="comment">
+    <div class="container">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Đánh giá khách hàng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">Viết đánh giá</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="profile">
+                <div class="container">
+                    <ul>
+                        @if (ViewBag.listView.Count <= 0)
+                        {
+                            <li style="color: #828282;margin-top: 30px;margin-bottom: 30px;"> Chưa có bất kì đánh giá nào .... </li>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.listView)
+                            {
+                                <li style="color: #828282;margin-top: 30px;margin-bottom: 30px;border-bottom: 1px solid  #ddd;">
+                                    <span>Tên : @item.name</span>
+                                    <p>
+                                        @{
+                                            for (int i = 0; i < item.vote; i++)
+                                            {
+                                                <i class="fa fa-star text-warning"></i>
+                                            }
+                                        }
+                                    </p>
+                                    <p>Đánh giá : @item.comment</p>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="buzz">
+                <div class="container">
+                    <div style="margin-top:30px; margin-bottom:50px;">
+                        @{ 
+                            
+                        }
+                        <form action="@Url.Action("ProductDetail","Home")" method="post" data-toggle="validator">
+                            
+                            <div class="form-group">
+                                <label style="color:#827f7f;">Tên người đánh giá</label>
+                                <input style="max-width:400px; font-size: 14px;" class="form-control" type="text" name="name" value="" placeholder="Tên của bạn.." required data-error="Vui lòng nhập tên của bạn!" />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group" >
+                                <label style="color:#827f7f;">Đánh giá(sao)</label>
+                                <select style="width:400px !important; font-size: 14px;" name="vote" class="form-control"> 
+                                    <option   value="1">1 </option>
+                                    <option  value="2">2 </option>
+                                    <option  value="3">3 </option>
+                                    <option value="4">4 </option>
+                                    <option value="5">5 </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style="color:#827f7f;">Đánh giá của bạn</label>
+                                <textarea class="form-control" style="max-width: 900px; font-size:14px;"  rows="8" type="text" name="comment" placeholder="Tên của bạn.." required data-error="Vui lòng nhập tên của bạn!"> </textarea>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <button style="padding: 10px 30px; font-size:14px; " class="btn btn-info">Gửi đánh giá</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+</div>
 <!-- Recently Viewed -->
 
 <div class="viewed">
@@ -142,14 +223,14 @@
 
 
                                             <div class="viewed_price discount">
-                                                @String.Format("{0:0,0 đ}", c) <br/>
-                                                <span> - @String.Format("{0:0,0 đ}",item.price)</span>
+                                                @String.Format("{0:0,0 đ}", c) <br />
+                                                <span> - @String.Format("{0:0,0 đ}", item.price)</span>
                                             </div>
 
                                         }
                                         else
                                         {
-                                            <div class="viewed_price"> @String.Format("{0:0,0 đ}",item.price)</div>
+                                            <div class="viewed_price"> @String.Format("{0:0,0 đ}", item.price)</div>
                                         }
                                         <div class="viewed_name"><a href="@Url.Action("ProductDetail",new { id = item.id })">@item.name_product</a></div>
                                     </div>

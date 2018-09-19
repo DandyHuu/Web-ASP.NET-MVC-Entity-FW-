@@ -55,18 +55,31 @@
                 <div class="contact_form_container">
                     <div class="contact_form_title">Đánh giá của bạn</div>
 
-                    <form action="#" id="contact_form">
+                    <form role="form" action="@Url.Action("Contact","Home")" method="post" id="contact_form" data-toggle="validator">
                         <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
-                            <input type="text" id="contact_form_name" class="contact_form_name input_field" placeholder="Tên của bạn" required="required" data-error="Name is required.">
-                            <input type="text" id="contact_form_email" class="contact_form_email input_field" placeholder="Email của bạn" required="required" data-error="Email is required.">
-                            <input type="text" id="contact_form_phone" class="contact_form_phone input_field" placeholder="Số điện thoại">
+                            <div class="form-group col-md-4">
+                                <input style="width:100%;" type="text" id="contact_form_name" name="name" class="contact_form_name input_field" placeholder="Tên của bạn"  required data-error="Tên không hợp lệ!">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <input style="width:100%;" type="email" id="contact_form_email" name="email" class="contact_form_email input_field" placeholder="Email của bạn" required data-error="Email không hợp lệ">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <input style="width:100%;" type="text" id="contact_form_phone" name="phone" class="contact_form_phone input_field" placeholder="Số điện thoại" pattern="^[0-9]{11,13}$" required data-error="Số điện thoại không hợp lệ!">
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
-                        <div class="contact_form_text">
-                            <textarea style="max-width: none;" id="contact_form_message" class="text_field contact_form_message" name="message" placeholder="Đánh giá" required="required" data-error="Please, write us a message."></textarea>
+                        <div class="contact_form_text form-group">
+                            <textarea style="max-width: none;" id="contact_form_message" class="text_field contact_form_message" name="message" placeholder="Đánh giá" required data-error="Vui lòng nhập đánh giá của bạn!"></textarea>
+                            <div class="help-block with-errors"></div>
                         </div>
+
                         <div class="contact_form_button">
-                            <button type="submit" class="button contact_submit_button">Gửi đánh giá</button>
+                            <button type="submit" class="btn button contact_submit_button">Gửi đánh giá</button>
                         </div>
+
+                        <label><h2 class="text-success text-center">@ViewBag.sussess</h2></label>
                     </form>
 
                 </div>

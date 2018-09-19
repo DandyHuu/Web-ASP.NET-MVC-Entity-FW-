@@ -10,15 +10,21 @@ namespace Biglesson_MVC.Controllers
 {
     public class CRUDController : Controller
     {
-       private Modelhitech db = new Modelhitech();
+       private Model_HiTech db = new Model_HiTech();
         // GET: CRUD
         public ActionResult Index()
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             return View();
         }
         
         public ActionResult CateCreate()
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             List<Category> Cate = new List<Category>();
             Cate = (from cate in db.Categories select cate).ToList();
             ViewBag.listCate = Cate;
@@ -28,6 +34,9 @@ namespace Biglesson_MVC.Controllers
         [HttpGet]
         public ActionResult CateEdit(int ID)
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             List<Category> Cate = new List<Category>();
             Cate = (from cate in db.Categories where cate.id == ID select cate).ToList();
             ViewBag.listCateID = Cate;
@@ -37,6 +46,9 @@ namespace Biglesson_MVC.Controllers
         [HttpPost]
         public ActionResult CateEdit(int ID, FormCollection collection)
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             string name_Cate = collection["name_Cate"];
 
             Category cate = db.Categories.SingleOrDefault(c => c.id == ID);
@@ -50,7 +62,10 @@ namespace Biglesson_MVC.Controllers
         }
         public RedirectToRouteResult AddCate()
         {
-                string name_Cate = Request.Form["name_Cate"];
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
+            string name_Cate = Request.Form["name_Cate"];
 
             Category newItem = new Category()
             {
@@ -67,7 +82,9 @@ namespace Biglesson_MVC.Controllers
         
         public RedirectToRouteResult DeleteCate( int ID)
         {
-
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             Category cate = db.Categories.SingleOrDefault(c => c.id == ID);
 
             if (cate == null)
@@ -85,37 +102,118 @@ namespace Biglesson_MVC.Controllers
         }
 
         //Product//
+        [HttpGet]
         public ActionResult ProductCreate()
         {
-            List<Category> Cate = new List<Category>();
-            Cate = (from cate in db.Categories select cate).ToList();
-            ViewBag.listCate = Cate;
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
+            ViewBag.listCate = (from c in db.Categories select c).ToList();
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ProductCreate(FormCollection collection)
+        {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
+            string nameProduct = collection["nameProduct"];
+
+            int cateProduct = Convert.ToInt16(collection["cateProduct"]);
+
+            int priceProduct = Convert.ToInt16(collection["priceProduct"]);
+
+            string imgProduct = collection["imgProduct"];
+
+            string dicriptionProduct = collection["dicriptionProduct"];
+
+            int saleProduct = Convert.ToInt16(collection["saleProduct"]);
+
+            int starProduct = Convert.ToInt16(collection["starProduct"]);
+
+            int quantityProduct = Convert.ToInt16(collection["quantityProduct"]);
+
+            Product newItem = new Product()
+            {
+                name_product = nameProduct,
+                price = priceProduct,
+                cate_id = cateProduct,
+                image = imgProduct,
+                sale = saleProduct,
+                star = starProduct,
+                quantity = quantityProduct,
+                dicription = dicriptionProduct
+            };
+
+            db.Products.Add(newItem);
+            db.SaveChanges(); 
+
+            return RedirectToAction("Products","Admin");
+        }
+
         [HttpGet]
         public ActionResult ProductEdit( int ID)
         {
-            List<Category> Cate = new List<Category>();
-            Cate = (from cate in db.Categories select cate).ToList();
-            ViewBag.listCate = Cate;
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
 
-            //List<Product> Pro = new List<Product>();
-             var Pro = (from p in db.Products where p.id == ID select p).ToList();
-            ViewBag.listProID = Pro;
-
+            ViewBag.listCate = (from c in db.Categories select c).ToList();
+            Product pro = db.Products.SingleOrDefault(x => x.id == ID);
+            ViewBag.listProID = pro;
             return View();
         }
         [HttpPost]
         public ActionResult ProductEdit(int ID, FormCollection collection)
         {
-            
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
 
-            return View();
+            ViewBag.listCate = (from c in db.Categories select c).ToList();
+
+            string nameProduct = collection["nameProduct"];
+
+            int cateProduct = Convert.ToInt16(collection["cateProduct"]);
+
+            int priceProduct = Convert.ToInt16(collection["priceProduct"]);
+
+            string imgProduct = collection["imgProduct"];
+
+            string dicriptionProduct = collection["dicriptionProduct"];
+
+            int saleProduct = Convert.ToInt16(collection["saleProduct"]);
+
+            int starProduct = Convert.ToInt16(collection["starProduct"]);
+
+            int quantityProduct = Convert.ToInt16(collection["quantityProduct"]);
+
+            Product pro = db.Products.SingleOrDefault(x => x.id == ID);
+
+            if (pro != null)
+            {
+                pro.name_product = nameProduct;
+                pro.price = priceProduct;
+                pro.cate_id = cateProduct;
+                pro.image = imgProduct;
+                pro.sale = saleProduct;
+                pro.star = starProduct;
+                pro.quantity = quantityProduct;
+                pro.dicription = dicriptionProduct;
+            };
+            UpdateModel(pro);
+            db.SaveChanges();
+
+            return RedirectToAction("Products", "Admin");
         }
 
         public RedirectToRouteResult DeleteProduct(int ID)
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
 
             Product pro = db.Products.SingleOrDefault(p => p.id == ID);
 
@@ -133,44 +231,95 @@ namespace Biglesson_MVC.Controllers
 
         }
         //Blog //
+
+        [HttpGet]
         public ActionResult BlogCreate()
         {
-           
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             return View();
         }
+
+        /* public ActionResult BlogCreate(HttpPostedFileBase nameFile , FormCollection collection )
+         {
+
+             try
+             {
+                 if (nameFile.ContentLength >0)
+                 {
+                     var filename = Path.GetFileName(nameFile.FileName);
+                     var path = Path.Combine(Server.MapPath("~/Content/images"), filename);
+
+                     nameFile.SaveAs(path);
+
+                     string title_Blog = collection["title_Blog"];
+
+                     string dicription_Blog = collection["dicription_Blog"].ToString();
+
+                     string image = collection["img_Blog"];
+                     string author_Blog = collection["author_Blog"];
+
+                     Blog newItem = new Blog()
+                     {
+                         title = title_Blog,
+                         dicription = dicription_Blog,
+                         author = author_Blog,
+                         image = filename
+                     };
+
+                     db.Blogs.Add(newItem);
+                     db.SaveChanges();
+                 }
+                 else
+                 {
+
+                     ViewBag.error = "Bạn cần chọn file!";
+                 }
+             }
+             catch (Exception e)
+             {
+
+                 ViewBag.error = "Có lỗi xảy ra với thao tác" + e;
+             }
+
+             return RedirectToAction("Blogs", "Admin");
+         }
+         */
         [HttpPost]
-        public ActionResult AddBlog(FormCollection collection , HttpPostedFileBase img_Blog)
+        public ActionResult BlogCreate( FormCollection collection)
         {
-            string title_Blog = collection["title_Blog"].ToString();
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
+            string title_Blog = collection["title_Blog"];
 
-            string dicription_Blog = collection["dicription_Blog"].ToString();
+                    string dicription_Blog = collection["dicription_Blog"];
 
-            string image = img_Blog.ToString();
-            if (img_Blog != null)
-            {
-                image = Path.GetFileName(img_Blog.FileName);
-                string path = Path.Combine(Server.MapPath("~/Content/images"), image);
-                img_Blog.SaveAs(path);
-            }
+                    string image = " aa";
+                    string author_Blog = collection["author_Blog"];
 
-            string author_Blog = collection["author_Blog"].ToString();
+                    Blog newItem = new Blog()
+                    {
+                        title = title_Blog,
+                        dicription = dicription_Blog,
+                        author = author_Blog,
+                        image = image
+                    };
 
-            Blog newItem = new Blog()
-            {
-                title = title_Blog,
-                dicription = dicription_Blog,
-                author = author_Blog,
-                image = image
-            };
-
-            db.Blogs.Add(newItem);
-            db.SaveChanges();
+                    db.Blogs.Add(newItem);
+                    db.SaveChanges();
 
             return RedirectToAction("Blogs", "Admin");
         }
+
+
         [HttpGet]
         public ActionResult BlogEdit(int ID)
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             List<Blog> blog = new List<Blog>();
             blog = (from b in db.Blogs where b.id == ID select b).ToList();
             ViewBag.listBlog = blog;
@@ -178,18 +327,91 @@ namespace Biglesson_MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult BlogEdit(int ID , FormCollection collection)
-        {
-            List<Blog> blog = new List<Blog>();
-            blog = (from b in db.Blogs where b.id == ID select b).ToList();
-            ViewBag.listBlog = blog;
 
-            return View();
+
+        ///Úp ảnh không thành công//
+        /* public ActionResult BlogEdit(int ID , HttpPostedFileBase nameFile, FormCollection collection)
+         {
+             try
+             {
+                 if (nameFile.ContentLength > 0)
+                 {
+                     var filename = Path.GetFileName(nameFile.FileName);
+                     var path = Path.Combine(Server.MapPath("~/Content/images"), filename);
+
+                     nameFile.SaveAs(path);
+
+                     Blog blog = db.Blogs.SingleOrDefault(x => x.id == ID);
+
+                     string title_Blog = collection["title_Blog"];
+
+                     string dicription_Blog = collection["dicription_Blog"];
+
+                     string author_Blog = collection["author_Blog"];
+
+                     if (blog != null)
+                     {
+
+                         blog.title = title_Blog;
+                         blog.dicription = dicription_Blog;
+                         blog.author = author_Blog;
+                         blog.image = filename;
+
+                         UpdateModel(blog);
+                         db.SaveChanges();
+                     }
+                 }
+                 else
+                 {
+                     ViewBag.error = "Bạn chưa chọn file";
+                 }
+             }
+             catch (Exception e)
+             {
+                 ViewBag.error = "Có lỗi xảy ra với thao tác" + e;
+
+             }
+             return RedirectToAction("Blogs", "Admin");
+         }*/
+
+        //KHÔNG UP ẢNH//
+        [HttpPost]
+        public RedirectToRouteResult BlogEdit(int ID, FormCollection collection)
+        {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
+
+
+            Blog blog = db.Blogs.SingleOrDefault(x => x.id == ID);
+
+                    string title_Blog = collection["title_Blog"];
+
+                    string dicription_Blog = Convert.ToString(collection["dicription_Blog"]);
+
+                    string author_Blog = collection["author_Blog"];
+
+                    string img_Blog = "aa";
+
+            if (blog != null)
+                    {
+
+                        blog.title = title_Blog;
+                        blog.dicription = dicription_Blog;
+                        blog.author = author_Blog;
+                        blog.image = img_Blog;
+
+                        UpdateModel(blog);
+                        db.SaveChanges();
+                    }
+                
+            
+            return RedirectToAction("Blogs", "Admin");
         }
 
         public RedirectToRouteResult DeleteBlog(int ID)
         {
+
 
             Blog blog = db.Blogs.SingleOrDefault(x => x.id == ID);
 
@@ -209,11 +431,17 @@ namespace Biglesson_MVC.Controllers
         //Người dùng//
         public ActionResult UserCreate()
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             return View();
         }
 
         public ActionResult AddUser()
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             string userName_User = Request.Form["userName_User"];
 
             string pass_User = Request.Form["pass_User"];
@@ -247,6 +475,9 @@ namespace Biglesson_MVC.Controllers
         [HttpGet]
         public ActionResult UserEdit(int ID)
         {
+            //Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
             List<User> users = new List<User>();
             users = (from u in db.Users where u.id == ID select u).ToList();
             ViewBag.listUser = users;
@@ -255,7 +486,9 @@ namespace Biglesson_MVC.Controllers
         }
         [HttpPost]
         public ActionResult UserEdit(int ID,FormCollection collection)
-        {
+        {//Session User//
+            List<UserItem> UserSession = Session["UserSession"] as List<UserItem>;
+            ViewBag.listUserSession = UserSession;
 
 
             return RedirectToAction("Users", "Admin");
@@ -266,7 +499,7 @@ namespace Biglesson_MVC.Controllers
 
             User user = db.Users.SingleOrDefault(x => x.id == ID);
 
-            if (user == null)
+            if (user == null || -+user.role_id != 1)
             {
                 return null;
             }

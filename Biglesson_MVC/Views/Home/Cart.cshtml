@@ -82,7 +82,56 @@
 
                     <div class="cart_buttons">
                         <a href="@Url.Action("Index")" class="button cart_button_clear">Tiếp tục mua hàng</a>
-                        <a href="@Url.Action("Cart")" class="button cart_button_checkout">Thanh toán</a>
+                        <a class="button cart_button_checkout" style="color:#ffffff;" data-toggle="modal" data-target="#myModal">Thanh toán</a>
+                        <div class="container-fluid">
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-left">Đặt hàng</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                        </div>
+                                        <div class="modal-body text-left">
+                                            <form action="@Url.Action("ThanhToan","Cart")" method="post" data-toggle="validator">
+                                                <div class="form-group">
+                                                    <label>Nhập tên của bạn</label>
+                                                    <input class="form-control" style="max-width:none;" type="text" name="name" required data-error="Tên không hợp lệ!" />
+                                                    <small class="help-block with-errors"></small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Số điện thoại</label>
+                                                    <input class="form-control" style="max-width:none;" type="text" name="phone" pattern="^[0-9]{11,13}$" required data-error="Số điện thoại không hợp lệ!" />
+                                                    <small class="help-block with-errors"></small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Địa chỉ</label>
+                                                    <input class="form-control" style="max-width:none;" type="text" name="address" required data-error="Địa chỉ không hợp lệ!" />
+                                                    <small class="help-block with-errors"></small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tổng tiền</label>
+                                                    <input class="form-control" style="max-width:none;" type="text" value="@String.Format("{0:0,0 đ}",totalMonney)" />
+                                                </div>
+                                                <div class="hidden">
+                                                    <label>Tổng tiền</label>
+                                                    <input class="form-control" style="max-width:none;" type="text" value="@totalMonney" name="total" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Thanh toán khi nhận hàng !</label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer text-center">
+                                            <button type="submit" class="btn btn-info">Đặt hàng</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

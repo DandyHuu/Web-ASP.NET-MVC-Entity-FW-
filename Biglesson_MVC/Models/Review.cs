@@ -9,6 +9,7 @@ namespace Biglesson_MVC.Models
     [Table("Review")]
     public partial class Review
     {
+
         public int id { get; set; }
 
         [StringLength(100)]
@@ -21,5 +22,10 @@ namespace Biglesson_MVC.Models
         public string phone { get; set; }
 
         public string dicription { get; set; }
+
+        [Column(TypeName = "timestamp")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [MaxLength(8)]
+        public byte[] time { get; set; }
     }
 }

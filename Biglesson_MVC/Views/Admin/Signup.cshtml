@@ -3,7 +3,25 @@
     ViewBag.Title = "Signup";
     Layout = "~/Views/Shared/_LayoutLoginLogout.cshtml";
 }
-
+<head>
+    <style>
+        .signup-block input[type="email"], .signup-block input[type="password"] {
+            font-size: 0.9em;
+            padding: 10px 20px;
+            width: 100%;
+            color: #686967;
+            outline: none;
+            border: 1px solid #D3D3D3;
+            border-radius: 5px;
+            -ms-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -o-border-radius: 5px;
+            background: #F5F5F5;
+            margin: 0em 0em 1.5em 0em;
+        }
+       
+    </style>
+</head>
 <div class="signup-page-main">
     <div class="signup-main">
         
@@ -11,26 +29,51 @@
             <h1>Đăng ký</h1>
         </div>
         <div class="signup-block">
-            <form>
-                <input style="max-width: 550px;" type="text" name="email" placeholder="Tên của bạn" required="">
-                <input style="max-width: 550px;" type="text" name="email" placeholder="Email" required="">
-                <input style="max-width: 550px;" type="text" name="email" placeholder="Địa chỉ" required="">
-                <input style="max-width: 550px;" type="text" name="email" placeholder="Số điện thoại" required="">
-                <input style="max-width: 550px;" type="text" name="email" placeholder="Tài khoản" required="">
-                <input style="max-width: 550px;" type="password" name="password" class="lock" placeholder="Mật khẩu">
-                <div class="forgot-top-grids">
-                    <div class="forgot-grid">
-                        <ul>
-                            <li>
-                                <input type="checkbox" id="brand1" value="">
-                                <label for="brand1"><span></span>Tôi đồng ý với điều khoản sử dụng</label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="clearfix"> </div>
+            <form role="form" action="@Url.Action("Signup","Admin")" method="post" data-toggle="validator">
+                <div class="form-group">
+                    <input style="max-width: 550px;" type="text" name="name" placeholder="Tên của bạn" pattern="^[a-zA-Z0-9]{5,20}$" required data-error="Tên không hợp lệ!">
+                    <small class="help-block with-errors"></small>
                 </div>
-                <input type="submit" name="Sign In" value="Đăng ký">
+                <div class="form-group">
+                    <input style="max-width: 550px;" type="email" name="email" placeholder="Email" required data-error="Email không hợp lệ!">
+                    <small class="help-block with-errors"></small>
+                </div>
+                <div class="form-group">
+                    <input style="max-width: 550px;" type="text" name="address" placeholder="Địa chỉ" required data-error="Địa chỉ không hợp lệ!">
+                    <small class="help-block with-errors"></small>
+                </div>
+                <div class="form-group">
+                    <input style="max-width: 550px;" type="text" name="phone" placeholder="Số điện thoại" pattern="^[0-9]{11,13}$" required data-error="Số điện thoại không hợp lệ!">
+                    <small class="help-block with-errors"></small>
+                </div>
+                <div class="form-group">
+                    <input style="max-width: 550px;" type="text" name="user_name" placeholder="Tài khoản" pattern="^[a-zA-Z0-9]{5,20}$" required data-error="Tài khoản không hợp lệ!">
+                    <small class="help-block with-errors"></small>
+                </div>
+                <div class="form-group">
+                    <input style="max-width: 550px;" type="password" name="password" class="lock" placeholder="Mật khẩu" pattern="^[a-zA-Z0-9]{3,20}$" required data-error="Mật khẩu không hợp lệ!">
+                    <small class="help-block with-errors"></small>
+                </div>
+                <div class="form-group">
+                    <div class="forgot-top-grids">
+                        <div class="forgot-grid">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" id="brand1" name="check" value="">
+                                    <label for="brand1"><span></span>Tôi đồng ý với điều khoản sử dụng</label>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+                <div>
+                    <label>@ViewBag.mess</label>
+                </div>
+                <div class="form-group" style="text-align:center;">
+                    <button type="submit" class="btn" style=" color: #fff;;background: #337AB7; width:280px;" name="Signup">Đăng ký</button>
+                </div>
             </form>
             <div class="sign-down">
                 <h4>Bạn đã có tài khoản ? <a href="@Url.Action("Login","Admin")"> Đăng nhập ngay</a></h4>

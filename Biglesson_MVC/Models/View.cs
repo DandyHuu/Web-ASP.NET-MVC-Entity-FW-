@@ -22,6 +22,11 @@ namespace Biglesson_MVC.Models
 
         public int? flat { get; set; }
 
+        [Column(TypeName = "timestamp")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [MaxLength(8)]
+        public byte[] time { get; set; }
+
         public virtual Product Product { get; set; }
     }
 }

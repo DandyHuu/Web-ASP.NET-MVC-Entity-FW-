@@ -10,11 +10,19 @@
             <h1>Đăng nhập</h1>
         </div>
         <div class="login-block">
-            <form action="@Url.Action("CheckLogin","Admin")" method="post">
-                <input style="max-width: 550px; margin-bottom: 5px; " type="text" name="name" placeholder="Tên đăng nhập" value="@ViewBag.Uservalue" required="">
-                <p class="text-danger" style="font-size:14px; margin-bottom: 25px;">@ViewBag.ErorrUser</p>
-                <input style="max-width: 550px; margin-bottom: 5px;" type="password" name="password"  class="lock" placeholder="Mật khẩu">
-                <p class="text-danger"  style="font-size:14px; margin-bottom: 25px;">@ViewBag.ErorrPass</p>
+            <form role="form" action="@Url.Action("CheckLogin","Admin")" method="post" data-toggle="validator">
+                <div class="form-group">
+                    <input class="form-control" style="max-width: 550px; margin-bottom: 5px; " type="text" name="name" placeholder="Tên đăng nhập" value="@ViewBag.Uservalue" pattern="^[a-zA-Z0-9]{5,20}$" required data-error="Tên đăng nhập không hợp lệ!">
+                    <p class="text-danger" style="font-size:14px; margin-bottom: 25px;">@ViewBag.ErorrUser</p>
+                    <small class="help-block with-errors"></small>
+                </div>
+                <div class="form-group">
+                    <input  class="form-control" style="max-width: 550px; margin-bottom: 5px;" type="password" name="password" class="lock" placeholder="Mật khẩu" pattern="^[a-zA-Z0-9]{3,15}$" required data-error="Mật khẩu không hợp lệ!">
+                    <p class="text-danger" style="font-size:14px; margin-bottom: 25px;">@ViewBag.ErorrPass</p>
+                    <small class="help-block with-errors"></small>
+                </div>
+                
+                
                 <div class="forgot-top-grids">
                     <div class="forgot-grid">
                         <ul>

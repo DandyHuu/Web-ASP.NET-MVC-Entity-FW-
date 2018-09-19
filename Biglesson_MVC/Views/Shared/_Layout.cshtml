@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body style="font-family:Cambria !important;" >
+<body style="font-family:Cambria !important;">
     <header class="header">
         <!-- Top Bar -->
         <div class="top_bar">
@@ -57,17 +57,17 @@
                                     {
                                         foreach (var item in ViewBag.listUserSession)
                                         {
-                                        <div >
-                                            <ul class="standard_dropdown main_nav_dropdown">
-                                                <li class="hassubs">
-                                                    <a href="#">Xin chào : @item.userName</a>
-                                                    <ul>
-                                                        <li><a href="#">Đăng xuất</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                            
+                                            <div>
+                                                <ul class="standard_dropdown main_nav_dropdown">
+                                                    <li class="hassubs">
+                                                        <a href="#">Xin chào : @item.name</a>
+                                                        <ul>
+                                                            <li><a href="@Url.Action("Logout","Admin")">Đăng xuất</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
                                         }
 
                                     }
@@ -109,8 +109,7 @@
                                         <div class="custom_dropdown">
                                             <div class="custom_dropdown_list">
                                                 <span class="custom_dropdown_placeholder clc"></span>
-                                                <ul class="custom_list clc">
-                                                </ul>
+                                                <ul class="custom_list clc"></ul>
                                             </div>
                                         </div>
                                         <button type="submit" class="header_search_button trans_300" value="Submit"><img src="~/Content/images/search.png" alt=""></button>
@@ -138,9 +137,9 @@
                                     <div class="cart_icon">
                                         <img src="~/Content/images/cart.png" alt="">
                                         @{
-                                            int Soluong=0;
+                                            int Soluong = 0;
                                             int totalMonney = 0;
-                                            
+
                                             if (ViewBag.Cart != null)
                                             {
                                                 foreach (var item in ViewBag.Cart)
@@ -149,7 +148,7 @@
                                                     totalMonney = (totalMonney + item.ThanhTien);
                                                 }
                                             }
-                                           
+
                                             <div class="cart_count"><span>@Soluong</span></div>
                                         }
 
@@ -391,8 +390,9 @@
     <script src="@Url.Content("~/Scripts/js/regular_custom.js")" type="text/javascript"></script>
     <!--Product-->
     <script src="@Url.Content("~/Scripts/js/product_custom.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Content/plugins/Isotope/isotope.pkgd.min.js")" ></script>
-    <script src="@Url.Content("~/Content/plugins/jquery-ui-1.12.1.custom/jquery-ui.js")" ></script>
-    <script src="@Url.Content("~/Scripts/js/shop_customm.js")" ></script>
+    <script src="@Url.Content("~/Content/plugins/Isotope/isotope.pkgd.min.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/jquery-ui-1.12.1.custom/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/shop_customm.js")"></script>
+    <script src="@Url.Content("~/Scripts/validator.js")"></script>
 </body>
 </html>

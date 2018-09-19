@@ -3,13 +3,15 @@
     ViewBag.Title = "BlogCreate";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <head>
     <style>
         input {
             max-width: 600px;
         }
+
         textarea {
-            max-width: 600px;
+            max-width: 900px;
         }
     </style>
 </head>
@@ -20,26 +22,26 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="@Url.Action("AddBlog","CRUD")" method="post">
+        <form role="form" action="@Url.Action("BlogCreate","CRUD")" method="post" enctype="multipart/form-data">
             <div class="box-body">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">ID</label>
+                    <label for="">ID</label>
                     <input type="text" class="form-control " name="id_Blog" disabled>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Title</label>
+                    <label for="">Title</label>
                     <input type="text" class="form-control" name="title_Blog">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Bài viết</label>
+                    <label for="">Bài viết</label>
                     <textarea class="form-control" rows="7" name="dicription_Blog"></textarea>
                 </div>
+                <!--  <div class="form-group">
+        <label for="exampleInputPassword1">Hình ảnh</label>
+        <input type="file" name="nameFile" id="nameFile" />
+    </div>-->
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Hình ảnh</label>
-                    <input type="file" name="img_Blog" value="" />
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Người đăng</label>
+                    <label for="">Người đăng</label>
                     <input type="text" class="form-control" name="author_Blog">
                 </div>
             </div>
@@ -51,4 +53,5 @@
         </form>
     </div>
 </section>
+
 

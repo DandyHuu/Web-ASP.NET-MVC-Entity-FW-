@@ -17,11 +17,12 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form">
+        <form role="form" action="@Url.Action("ProductCreate","CRUD")" method="post" data-toggle="validator">
             <div class="box-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tên sản phẩm</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên sản phẩm">
+                    <input type="text" name="nameProduct" class="form-control" id="exampleInputEmail1" required data-error="Vui lòng nhập lại tên sản phẩm!!" placeholder="Nhập tên sản phẩm">
+                    <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Danh mục</label>
@@ -34,11 +35,17 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Đơn giá (đ)</label>
-                    <input type="number" class="form-control" name="priceProduct" value="0" placeholder="Nhập giá">
+                    <input type="number" class="form-control" name="priceProduct" value="1" placeholder="Nhập giá" required data-error="Vui lòng nhập lại giá!!">
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Mô tả</label>
+                    <input type="text" class="form-control" name="dicriptionProduct" placeholder="Nhập mô tả" pattern="^[a-zA-Z0-9]{50,1000}$"  required data-error="Vui lòng nhập lại mô tả!!">
+                    <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">File ảnh</label>
-                    <input type="file" id="exampleInputFile" name="imgProduct">
+                    <input type="file" class="form-control-file" id="exampleInputFile" name="imgProduct">
 
                 </div>
                 <div class="form-group">
@@ -49,12 +56,12 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Sale (%)</label>
-                    <input type="number" class="form-control" name="saleProduct" placeholder="Nhập mức sale">
+                    <input type="number" class="form-control" name="saleProduct"  value="0" placeholder="Nhập mức sale">
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Đánh giá ban đầu (<i class="fa fa-star text-warning"></i>) </label>
-                    <select name="cateProduct" class="form-control" style="width:100px;">
+                    <select name="starProduct" class="form-control" style="width:100px;">
                         <option value="1"> 1  </option>
                         <option value="2"> 2 </option>
                         <option value="3"> 3 </option>
@@ -65,7 +72,9 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Số lượng</label>
-                    <input type="number" class="form-control" name="quantityProduct" value="0" placeholder="Nhập số lượng">
+                    <input type="number" class="form-control" name="quantityProduct" value="0" pattern="^[0-9]{1,4}$"  required data-error="Vui lòng nhập lại số lượng!" placeholder="Nhập số lượng">
+                    <div class="help-block with-errors"></div>
+
                 </div>
 
             </div>

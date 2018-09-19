@@ -11,7 +11,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="@Url.Action("CateEdit","CRUD")" method="post">
+        <form role="form" action="@Url.Action("CateEdit","CRUD")" method="post" data-toggle="validator">
             @foreach (var item in ViewBag.listCateID)
             {
 
@@ -22,7 +22,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Tên danh mục</label>
-                        <input type="text" class="form-control" name="name_Cate" value="@item.name">
+                        <input type="text" class="form-control" name="name_Cate" value="@item.name"  required data-error="Không hợp lệ!!">
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <!-- /.box-body -->

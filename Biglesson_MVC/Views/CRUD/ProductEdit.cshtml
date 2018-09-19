@@ -18,15 +18,16 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="@Url.Action("ProductEdit","CRUD")" method="post">
+        <form role="form" action="@Url.Action("ProductEdit","CRUD")" method="post" data-toggle="validator">
             <div class="box-body">
                 @foreach (var item in ViewBag.listProID)
                 {
 
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Tên sản phẩm</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên sản phẩm" value="@item.name_product">
-                    </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên sản phẩm</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên sản phẩm" value="@item.name_product" required data-error="Tên không hợp lệ!!">
+                    <div class="help-block with-errors"></div>
+                </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Danh mục</label>
                         <select name="cateProduct" class="form-control">
@@ -46,22 +47,25 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Đơn giá (đ)</label>
-                        <input type="number" class="form-control" name="priceProduct" value="@item.price" placeholder="Nhập giá" >
+                        <input type="number" class="form-control" name="priceProduct" value="@item.price" pattern="^[0-9]{1,15}$"  required data-error="Vui lòng nhập lại giá!" placeholder="Nhập giá">
+                        <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">File ảnh</label>
-                        <input type="file" id="exampleInputFile" name="imgProduct">
+                        <input type="file" class="form-control-file" id="exampleInputFile" name="imgProduct">
 
                     </div>
                     <div class="form-group">
                         <label>
                             <input type="checkbox" name="newProduct"> là hàng mới nhập ?
                         </label>
+                     
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Sale (%)</label>
-                        <input type="number" class="form-control" name="saleProduct" placeholder="Nhập mức sale" value="@item.sale">
+                        <input type="number" class="form-control" name="saleProduct" pattern="^[0-9]{1,2}$"  required data-error="Vui lòng nhập lại!" placeholder="Nhập mức sale" value="@item.sale">
+                        <div class="help-block with-errors"></div>
                     </div>
 
                     <div class="form-group">
@@ -77,7 +81,8 @@
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Số lượng</label>
-                        <input type="number" class="form-control" name="quantityProduct" value="@item.quantity" placeholder="Nhập số lượng">
+                        <input type="number" class="form-control" name="quantityProduct" value="@item.quantity" pattern="^[0-9]{1,3}$"  required data-error="Vui lòng nhập lại!" placeholder="Nhập số lượng">
+                        <div class="help-block with-errors"></div>
                     </div>
                 }
 

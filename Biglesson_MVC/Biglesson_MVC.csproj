@@ -52,6 +52,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -166,7 +172,7 @@
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Modelhitech.cs" />
+    <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderItem.cs" />
@@ -757,6 +763,7 @@
     <Content Include="Content\Login_css\css\style.css" />
     <Content Include="Content\Login_css\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Login_css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\plugins\easing\easing.js" />
     <Content Include="Content\plugins\fontawesome-free-5.0.1\css\fontawesome-all.css" />
     <Content Include="Content\plugins\fontawesome-free-5.0.1\webfonts\fa-brands-400.svg" />
@@ -1019,6 +1026,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.twbsPagination.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1045,6 +1053,7 @@
     <Content Include="Scripts\Login_js\js\scripts.js" />
     <Content Include="Scripts\Login_js\js\skycons.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\validator.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1078,10 +1087,10 @@
     <Content Include="Views\CRUD\ProductCreate.cshtml" />
     <Content Include="Views\CRUD\ProductEdit.cshtml" />
     <Content Include="Views\Admin\Orders.cshtml" />
-    <Content Include="Views\CRUD\BlogCreate.cshtml" />
     <Content Include="Views\CRUD\BlogEdit.cshtml" />
     <Content Include="Views\CRUD\UserCreate.cshtml" />
     <Content Include="Views\CRUD\UserEdit.cshtml" />
+    <Content Include="Views\CRUD\BlogCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
